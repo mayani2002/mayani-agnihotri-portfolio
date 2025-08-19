@@ -25,9 +25,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         }
     }, []);
 
-    // Update body class and local storage when theme changes
+    // Update html class and local storage when theme changes
     useEffect(() => {
-        document.body.className = theme === 'dark' ? 'dark' : 'light';
+        const root = document.documentElement;
+        root.classList.toggle('dark', theme === 'dark');
         localStorage.setItem('theme', theme);
     }, [theme]);
 

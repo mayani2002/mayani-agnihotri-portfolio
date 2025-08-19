@@ -57,15 +57,14 @@ export default function VerticalNav() {
                         <span className=" text-xs h-3 align-[-2px] text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             {link.label}
                         </span>
-                        <a
+                        <Link
                             href={link.href}
-                            target="_blank"
+                            aria-current="page"
                             rel="noopener noreferrer"
-                            aria-label={link.label}
                             className="p-2 bg-gray-300 text-white dark:text-black rounded-full hover:bg-blue-500 hover:text-white transition-colors duration-300"
                         >
                             {link.icon}
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

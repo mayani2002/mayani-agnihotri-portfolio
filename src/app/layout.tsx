@@ -27,12 +27,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Kalam&family=Qwitcher+Grypen&family=Rubik&display=swap"
-        rel="stylesheet"
-      />
-    </head>
       <body suppressHydrationWarning
         className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable}`}
       >
