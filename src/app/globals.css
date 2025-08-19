@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  font-family: var(--font-main);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-main: 'Rubik', sans-serif;
+  --font-kalam: 'Kalam', cursive;
+  --font-qwitcher: 'Qwitcher Grypen', cursive;
+
+  --color-primary-light: #60CAD9;
+  --color-accent-light: #FF7999;
+  --color-bg-light: #FFFFFF;
+  --color-text-light: #143659;
+  --color-lessimp-light: #CCD6F6;
+
+
+  --color-bg-dark: #251C31;
+  --color-primary-dark: #693B93;
+  --color-accent-dark: #4F228D;
+  --color-text-dark: #FFFFFF;
+  --color-lessimp-dark: #8b8b8b;
+
+}
+.dark {
+  color-scheme: dark;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
+/* font usages */
+.font-main {
+  font-family: var(--font-main);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.font-kalam {
+  font-family: var(--font-kalam);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.font-qwitcher {
+  font-family: var(--font-qwitcher);
 }
+/* Create utility classes as needed, e.g.: */
+
+.text-primary-light {
+  color: var(--color-primary-light);
+}
+
+.text-primary-dark {
+  color: var(--color-primary-dark);
+}
+

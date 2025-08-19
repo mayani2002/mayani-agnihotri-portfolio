@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
+import VerticalNav from './_components/RightVerticalNav'; // New import
+import { ThemeProvider } from './_utils/ThemeProvider'; // New Import
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+
+const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
+const kalam = Kalam({
+  subsets: ["latin"], variable: "--font-kalam",
+  weight: "300"
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const qwitcherGrypen = Qwitcher_Grypen({
+  subsets: ["latin"], variable: "--font-qwitcher",
+  weight: "400"
 });
 
 export const metadata: Metadata = {
@@ -23,11 +26,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <head>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Kalam&family=Qwitcher+Grypen&family=Rubik&display=swap"
+        rel="stylesheet"
+      />
+    </head>
+      <body suppressHydrationWarning
+        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable}`}
       >
-        {children}
+        <ThemeProvider>
+          <VerticalNav />
+          <main className="">
+
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
