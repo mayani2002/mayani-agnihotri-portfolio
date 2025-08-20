@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
-import VerticalNav from './_components/RightVerticalNav'; // New import
 import { ThemeProvider } from './_utils/ThemeProvider'; // New Import
 
 
@@ -31,8 +30,7 @@ export default function RootLayout({
         className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable}`}
       >
         <ThemeProvider>
-          <VerticalNav />
-          <main className="">
+          <main >
 
             {children}
           </main>
