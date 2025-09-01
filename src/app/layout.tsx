@@ -1,18 +1,6 @@
 import type { Metadata } from "next";
-import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from './_utils/ThemeProvider'; // New Import
-
-
-const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
-const kalam = Kalam({
-  subsets: ["latin"], variable: "--font-kalam",
-  weight: "300"
-});
-const qwitcherGrypen = Qwitcher_Grypen({
-  subsets: ["latin"], variable: "--font-qwitcher",
-  weight: "400"
-});
 
 export const metadata: Metadata = {
   title: "Mayani Agnihotri | Software Engineer | Fullstack Developer | React, Node.js & Freelance Projects",
@@ -60,9 +48,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.svg" />
         <meta name="theme-color" content="#FF1493" />
       </head>
-      <body suppressHydrationWarning
-        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable}`}
-      >
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <main >
 
