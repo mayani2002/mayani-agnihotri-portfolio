@@ -1,7 +1,7 @@
 
 'use client';
 import { useState } from "react";
-import { FaTwitter, FaLinkedinIn, FaGithub, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
+import { FaXTwitter, FaLinkedinIn, FaGithub, FaBars, FaAngleLeft, FaEnvelope } from "react-icons/fa6";
 
 export default function LeftSidebar() {
     // Start closed on mobile for better UX, open on desktop will be handled by CSS
@@ -47,7 +47,7 @@ export default function LeftSidebar() {
                     onClick={() => setIsOpen(false)}
                     className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-10"
                 >
-                    <FaTimes size={12} />
+                    <FaAngleLeft size={12} />
                 </button>
 
                 {/* Scrollable Content Container */}
@@ -100,10 +100,10 @@ export default function LeftSidebar() {
                             <FaLinkedinIn size={14} />
                         </a>
                         <a
-                            href="https://twitter.com/mayani_agnihotri"
+                            href="https://x.com/mayani_agnihotri"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Twitter Profile"
+                            aria-label="X Profile"
                             className="
                     w-7 h-7 flex items-center justify-center rounded-full 
                     bg-[var(--color-primary-light)] text-white 
@@ -111,7 +111,7 @@ export default function LeftSidebar() {
                     dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
                     transition-colors duration-200"
                         >
-                            <FaTwitter size={14} />
+                            <FaXTwitter size={14} />
                         </a>
                         <a
                             href="mailto:mayani.agni01@gmail.com"

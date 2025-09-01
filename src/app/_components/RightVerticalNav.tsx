@@ -1,26 +1,26 @@
 'use client';
 import Link from 'next/link';
 import {
-    FaHome,
-    FaCode,
-    FaPenFancy,
+    FaHouse,
+    FaFileCode,
+    FaSquarePen,
     FaGraduationCap,
     FaBriefcase,
-    FaTools,
+    FaDev,
     FaTrophy,
-    FaGrinStars,
-} from 'react-icons/fa';
+    FaUserPen,
+} from 'react-icons/fa6';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaHome size={18} />, label: 'Home', color: 'text-blue-500' },
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaBriefcase size={18} />, label: 'Work', color: 'text-green-500' },
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaCode size={18} />, label: 'Projects', color: 'text-purple-500' },
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaTools size={18} />, label: 'Tech Stack', color: 'text-yellow-500' },
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaTrophy size={18} />, label: 'Success', color: 'text-pink-500' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaHouse size={18} />, label: 'Home', color: 'text-gray-500' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaBriefcase size={18} />, label: 'Work', color: 'text-sky-600' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaFileCode size={18} />, label: 'Projects', color: 'text-cyan-600' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaDev size={18} />, label: 'Tech Stack', color: 'text-purple-500' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaTrophy size={18} />, label: 'Success', color: 'text-yellow-500' },
     { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaGraduationCap size={18} />, label: 'Education', color: 'text-indigo-500' },
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaPenFancy size={18} />, label: 'Blogs', color: 'text-orange-500' },
-    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaGrinStars size={18} />, label: 'Feedback', color: 'text-red-500' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaSquarePen size={18} />, label: 'Blogs', color: 'text-fuchsia-500' },
+    { href: 'https://github.com/Mayani-Brijesh-Agnihotri', icon: <FaUserPen size={18} />, label: 'Feedback', color: 'text-green-500' },
 ];
 
 export default function RightVerticalNav() {
