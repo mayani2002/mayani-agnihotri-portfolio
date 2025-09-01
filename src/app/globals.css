@@ -160,6 +160,27 @@
   border-color: var(--color-accent-light);
 }
 
+/* Mobile Resume Button */
+.btn-resume-mobile {
+  background-color: #16a34a;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  box-shadow: var(--shadow-large);
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+
+.dark .btn-resume-mobile {
+  background-color: #16a34a;
+}
+
+.dark .btn-resume-mobile:hover {
+  background-color: #15803d;
+}
+
 /* Theme Toggle Specific */
 .theme-toggle {
   padding: 0.5rem;

@@ -18,6 +18,16 @@ export default function LeftSidebar() {
                 ></div>
             )}
 
+            {/* Mobile-only floating download resume button */}
+            <a
+                href="/Mayani-Agnihotri-Resume.pdf"
+                download="Mayani-Agnihotri-Resume.pdf"
+                className="fixed bottom-20 left-4 md:hidden btn-resume-mobile select-none text-sm z-50"
+                aria-label="Download Resume"
+            >
+                📄 Resume
+            </a>
+
             {/* Hamburger button when sidebar is closed - better positioning for mobile */}
             {!isOpen && (
                 <button
