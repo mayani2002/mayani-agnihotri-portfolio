@@ -1,7 +1,7 @@
 
 'use client';
 import { useState } from "react";
-import { FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
+import { FaTwitter, FaLinkedinIn, FaGithub, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
 
 export default function LeftSidebar() {
     // Start closed on mobile for better UX, open on desktop will be handled by CSS
