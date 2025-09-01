@@ -8,9 +8,9 @@
 }
 
 @theme inline {
-  --font-main: 'Rubik', sans-serif;
-  --font-kalam: 'Kalam', cursive;
-  --font-qwitcher: 'Qwitcher Grypen', cursive;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-kalam: Georgia, serif;
+  --font-qwitcher: cursive;
 
   --color-primary-light: #60CAD9;
   --color-accent-light: #FF7999;
@@ -51,5 +51,46 @@
 
 .text-primary-dark {
   color: var(--color-primary-dark);
+}
+
+/* Custom animations */
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px var(--color-primary-light);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--color-primary-light);
+  }
+}
+
+.animate-borderGlow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-light);
+  border-radius: 2px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Dark mode scrollbar */
+.dark .sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-dark);
+}
+
+.dark .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-light);
 }
 
