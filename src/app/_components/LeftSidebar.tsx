@@ -23,7 +23,7 @@ export default function LeftSidebar() {
                 <button
                     aria-label="Open sidebar"
                     onClick={() => setIsOpen(true)}
-                    className="fixed top-3 left-3 md:top-4 md:left-4 bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-2 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-40"
+                    className="fixed top-3 left-3 md:top-4 md:left-4 bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] rounded-full p-2 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-40"
                 >
                     <FaBars size={16} />
                 </button>
@@ -45,7 +45,7 @@ export default function LeftSidebar() {
                 <button
                     aria-label="Close sidebar"
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-10"
+                    className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-10"
                 >
                     <FaTimes size={12} />
                 </button>
@@ -61,7 +61,7 @@ export default function LeftSidebar() {
                         </div>
 
                         {/* Name and Title */}
-                        <h2 className="mt-2 font-kalam text-lg text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-center leading-tight">
+                        <h2 className="mt-2 font-kalam text-lg text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] text-center leading-tight">
                             Mayani Agnihotri
                         </h2>
                         <h4 className="text-xs font-medium text-gray-500 dark:text-[var(--color-lessimp-light)] mb-3 text-center">
@@ -141,7 +141,7 @@ export default function LeftSidebar() {
                                     <span className="bg-[var(--color-accent-light)] dark:bg-[var(--color-accent-dark)] text-white px-2  rounded text-xs font-semibold flex-shrink-0">
                                         {label}
                                     </span>
-                                    <span className="text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-right text-xs break-words">
+                                    <span className="text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] text-right text-xs break-words">
                                         {value}
                                     </span>
                                 </div>
