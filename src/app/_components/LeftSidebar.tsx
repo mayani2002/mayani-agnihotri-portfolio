@@ -4,7 +4,8 @@ import { useState } from "react";
 import { FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
 
 export default function LeftSidebar() {
-    const [isOpen, setIsOpen] = useState(false); // Start closed on mobile for better UX
+    // Start closed on mobile for better UX, open on desktop will be handled by CSS
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
@@ -17,21 +18,21 @@ export default function LeftSidebar() {
                 ></div>
             )}
 
-            {/* Hamburger button when sidebar is closed */}
+            {/* Hamburger button when sidebar is closed - better positioning for mobile */}
             {!isOpen && (
                 <button
                     aria-label="Open sidebar"
                     onClick={() => setIsOpen(true)}
-                    className="fixed top-4 left-4 bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-1.5 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-40"
+                    className="fixed top-3 left-3 md:top-4 md:left-4 bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-2 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-40"
                 >
-                    <FaBars size={14} />
+                    <FaBars size={16} />
                 </button>
             )}
 
             <aside
                 className={`
           fixed top-0 left-0 h-screen bg-white dark:bg-[var(--color-bg-dark)]
-          rounded-r-3xl shadow-xl flex flex-col py-4 px-6 z-50
+          rounded-r-3xl shadow-xl flex flex-col py-3 px-5 z-50
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           
@@ -40,36 +41,36 @@ export default function LeftSidebar() {
         `}
                 aria-label="Sidebar Navigation"
             >
-                {/* Close Button - only visible when sidebar is open */}
+                {/* Close Button - positioned well inside sidebar frame */}
                 <button
                     aria-label="Close sidebar"
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-[-1.5rem] bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-1.5 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200"
+                    className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-10"
                 >
-                    <FaTimes size={14} />
+                    <FaTimes size={12} />
                 </button>
 
                 {/* Scrollable Content Container */}
-                <div className="flex-1 flex flex-col pt-4 pb-4 min-h-0">
+                <div className="flex-1 flex flex-col pt-8 pb-3 min-h-0">
                     {/* Profile Section */}
-                    <div className="flex-shrink-0 mb-6">
+                    <div className="flex-shrink-0 mb-4">
                         {/* Profile Image */}
-                        <div className="w-24 h-24 rounded-full mx-auto flex-shrink-0 overflow-hidden border-3 border-[var(--color-primary-light)] mb-4 shadow relative">
+                        <div className="w-20 h-20 rounded-full mx-auto flex-shrink-0 overflow-hidden border-3 border-[var(--color-primary-light)] mb-3 shadow relative">
                             <img src="/profile-mayani.jpeg" alt="Mayani Agnihotri Profile" className="w-full h-full object-cover" />
                             <span className="absolute bottom-0 right-0 w-4 h-4 bg-[var(--color-accent-light)] border-2 border-white rounded-full shadow-lg"></span>
                         </div>
 
                         {/* Name and Title */}
-                        <h2 className="mt-2 font-kalam text-xl text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-center leading-tight">
+                        <h2 className="mt-2 font-kalam text-lg text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-center leading-tight">
                             Mayani Agnihotri
                         </h2>
-                        <h4 className="text-xs font-medium text-gray-500 dark:text-[var(--color-lessimp-light)] mb-4 text-center">
+                        <h4 className="text-xs font-medium text-gray-500 dark:text-[var(--color-lessimp-light)] mb-3 text-center">
                             Software Engineer & Fullstack Developer
                         </h4>
                     </div>
 
                     {/* Social Icons */}
-                    <div className="flex flex-wrap justify-center gap-2 mb-6 flex-shrink-0">
+                    <div className="flex flex-wrap justify-center gap-2 mb-4 flex-shrink-0">
                         <a
                             href="https://github.com/mayani2002"
                             target="_blank"
@@ -126,8 +127,8 @@ export default function LeftSidebar() {
                         </a>
                     </div>
 
-                    {/* Info Section - Scrollable */}
-                    <div className="flex-1 overflow-y-auto min-h-0 mb-3 sidebar-scroll">
+                    {/* Info Section - Scrollable with improved scrollbar */}
+                    <div className="flex-1 overflow-y-auto min-h-0 mb-3 sidebar-scroll pr-1">
                         <div className="flex flex-col gap-2 text-xs font-medium">
                             {[
                                 ["Age:", "23"],
