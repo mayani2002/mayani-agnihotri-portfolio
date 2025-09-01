@@ -1,10 +1,10 @@
 
 'use client';
 import { useState } from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, FaBars, FaTimes } from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
 
 export default function LeftSidebar() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false); // Start closed on mobile for better UX
 
     return (
         <>
@@ -17,118 +17,154 @@ export default function LeftSidebar() {
                 ></div>
             )}
 
+            {/* Hamburger button when sidebar is closed */}
+            {!isOpen && (
+                <button
+                    aria-label="Open sidebar"
+                    onClick={() => setIsOpen(true)}
+                    className="fixed top-4 left-4 bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-1.5 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-40"
+                >
+                    <FaBars size={14} />
+                </button>
+            )}
+
             <aside
                 className={`
           fixed top-0 left-0 h-screen bg-white dark:bg-[var(--color-bg-dark)]
-          rounded-r-3xl shadow-xl flex flex-col py-8 px-6 z-50
-          transform transition-transform duration-300 ease-in-out max-h-screen
+          rounded-r-3xl shadow-xl flex flex-col py-4 px-6 z-50
+          transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           
           w-72 md:w-64 
-
-          md:hover:shadow-[0_0_20px_var(--color-primary-light)]
-          relative
-
-          border-4 border-transparent md:border-[var(--color-primary-light)]
-          md:rounded-r-3xl
-          md:transition-shadow md:duration-1000 md:ease-in-out
-          md:animate-borderGlow
+          overflow-y-auto overflow-x-hidden
         `}
                 aria-label="Sidebar Navigation"
             >
-                {/* Toggle Button */}
+                {/* Close Button - only visible when sidebar is open */}
                 <button
-                    aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="absolute top-4 right-[-2rem] md:right-[-2.5rem] bg-[var(--color-primary-light)] hover:bg-[var(--color-primary-dark)] dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)] text-white rounded-full p-2 shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition"
+                    aria-label="Close sidebar"
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-4 right-[-1.5rem] bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] rounded-full p-1.5 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200"
                 >
-                    {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+                    <FaTimes size={14} />
                 </button>
 
-                {/* Profile Image */}
-                <div className="w-28 h-28 rounded-full mx-auto flex-shrink-0 overflow-hidden border-4 border-[var(--color-primary-light)] mb-4 shadow relative">
-                    <img src="/profile.jpg" alt="Profile" className="w-full h-full object-cover" />
-                    <span className="absolute bottom-1 right-1 w-5 h-5 bg-[var(--color-accent-light)] border-2 border-white rounded-full shadow-lg"></span>
-                </div>
-
-                {/* Name and Title */}
-                <h2 className="mt-1 font-kalam text-2xl text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-center">
-                    Rayan Adlardard
-                </h2>
-                <h4 className="text-sm font-medium text-gray-500 dark:text-[var(--color-lessimp-light)] mb-6 text-center">
-                    Front-End Developer
-                </h4>
-
-                {/* Social Icons */}
-                <div className="flex flex-wrap justify-center gap-3 mb-6">
-                    {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub].map((Icon, i) => (
-                        <a
-                            key={i}
-                            href="#"
-                            aria-label="Social link"
-                            className="
-                w-8 h-8 flex items-center justify-center rounded-full 
-                bg-[var(--color-primary-light)] text-white 
-                hover:bg-[var(--color-primary-dark)] 
-                dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
-                transition"
-                        >
-                            <Icon />
-                        </a>
-                    ))}
-                </div>
-
-                {/* Info Section */}
-                <div className="flex flex-col gap-3 text-sm font-medium">
-                    {[
-                        ["Age:", "24"],
-                        ["Residence:", "BD"],
-                        ["Freelance:", <span key="available" className="text-green-600 dark:text-green-400 font-semibold">Available</span>],
-                        ["Address:", "Dhaka, Bangladesh"],
-                    ].map(([label, value], idx) => (
-                        <div key={idx} className="flex justify-between items-center">
-                            <span className="bg-[var(--color-accent-light)] dark:bg-[var(--color-accent-dark)] text-white px-2 py-1 rounded font-semibold">
-                                {label}
-                            </span>
-                            <span className="text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-right">
-                                {value}
-                            </span>
+                {/* Scrollable Content Container */}
+                <div className="flex-1 flex flex-col pt-4 pb-4 min-h-0">
+                    {/* Profile Section */}
+                    <div className="flex-shrink-0 mb-6">
+                        {/* Profile Image */}
+                        <div className="w-24 h-24 rounded-full mx-auto flex-shrink-0 overflow-hidden border-3 border-[var(--color-primary-light)] mb-4 shadow relative">
+                            <img src="/profile-mayani.jpeg" alt="Mayani Agnihotri Profile" className="w-full h-full object-cover" />
+                            <span className="absolute bottom-0 right-0 w-4 h-4 bg-[var(--color-accent-light)] border-2 border-white rounded-full shadow-lg"></span>
                         </div>
-                    ))}
+
+                        {/* Name and Title */}
+                        <h2 className="mt-2 font-kalam text-xl text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-center leading-tight">
+                            Mayani Agnihotri
+                        </h2>
+                        <h4 className="text-xs font-medium text-gray-500 dark:text-[var(--color-lessimp-light)] mb-4 text-center">
+                            Software Engineer & Fullstack Developer
+                        </h4>
+                    </div>
+
+                    {/* Social Icons */}
+                    <div className="flex flex-wrap justify-center gap-2 mb-6 flex-shrink-0">
+                        <a
+                            href="https://github.com/mayani2002"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub Profile"
+                            className="
+                    w-7 h-7 flex items-center justify-center rounded-full 
+                    bg-[var(--color-primary-light)] text-white 
+                    hover:bg-[var(--color-primary-dark)] 
+                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
+                    transition-colors duration-200"
+                        >
+                            <FaGithub size={14} />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/mayani-agnihotri/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn Profile"
+                            className="
+                    w-7 h-7 flex items-center justify-center rounded-full 
+                    bg-[var(--color-primary-light)] text-white 
+                    hover:bg-[var(--color-primary-dark)] 
+                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
+                    transition-colors duration-200"
+                        >
+                            <FaLinkedinIn size={14} />
+                        </a>
+                        <a
+                            href="https://twitter.com/mayani_agnihotri"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Twitter Profile"
+                            className="
+                    w-7 h-7 flex items-center justify-center rounded-full 
+                    bg-[var(--color-primary-light)] text-white 
+                    hover:bg-[var(--color-primary-dark)] 
+                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
+                    transition-colors duration-200"
+                        >
+                            <FaTwitter size={14} />
+                        </a>
+                        <a
+                            href="mailto:mayani.agni01@gmail.com"
+                            aria-label="Email Contact"
+                            className="
+                    w-7 h-7 flex items-center justify-center rounded-full 
+                    bg-[var(--color-primary-light)] text-white 
+                    hover:bg-[var(--color-primary-dark)] 
+                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
+                    transition-colors duration-200"
+                        >
+                            <FaEnvelope size={14} />
+                        </a>
+                    </div>
+
+                    {/* Info Section - Scrollable */}
+                    <div className="flex-1 overflow-y-auto min-h-0 mb-3 sidebar-scroll">
+                        <div className="flex flex-col gap-2 text-xs font-medium">
+                            {[
+                                ["Age:", "23"],
+                                ["Location:", "India"],
+                                ["Freelance:", <span key="available" className="text-green-600 dark:text-green-400 font-semibold">Available</span>],
+                                ["Experience:", "1 Yr (non-internship)"],
+                                ["Email:", "mayani.agni01@gmail.com"],
+                            ].map(([label, value], idx) => (
+                                <div key={idx} className="flex justify-between items-center gap-2">
+                                    <span className="bg-[var(--color-accent-light)] dark:bg-[var(--color-accent-dark)] text-white px-2  rounded text-xs font-semibold flex-shrink-0">
+                                        {label}
+                                    </span>
+                                    <span className="text-[var(--color-text-dark)] dark:text-[var(--color-text-light)] text-right text-xs break-words">
+                                        {value}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Download CV Button - Always at bottom */}
+                    <div className="flex-shrink-0 mt-auto">
+                        <a
+                            href="/Mayani-Agnihotri-Resume.pdf"
+                            download="Mayani-Agnihotri-Resume.pdf"
+                            className="
+                    bg-green-700 hover:bg-green-800 text-white font-semibold 
+                    px-4 py-2 rounded-full shadow-md text-center transition-colors duration-200
+                    dark:bg-green-600 dark:hover:bg-green-700
+                    w-full select-none text-sm block
+                  "
+                        >
+                            Download Resume
+                        </a>
+                    </div>
                 </div>
-
-                {/* Spacer pushes button to bottom */}
-                <div className="flex-grow" />
-
-                {/* Download CV Button */}
-                <a
-                    href="/CV.pdf"
-                    download
-                    className="
-            bg-green-700 hover:bg-green-800 text-white font-semibold 
-            px-5 py-2 rounded-full shadow-md text-center transition-colors duration-200
-            dark:bg-green-600 dark:hover:bg-green-700
-            w-full select-none
-          "
-                >
-                    Download CV
-                </a>
             </aside>
-
-            {/* For animation: add custom styles in global CSS */}
-            <style jsx global>{`
-        @keyframes borderGlow {
-          0%, 100% {
-            box-shadow: 0 0 8px var(--color-primary-light);
-          }
-          50% {
-            box-shadow: 0 0 20px var(--color-primary-light);
-          }
-        }
-        .animate-borderGlow {
-          animation: borderGlow 3s ease-in-out infinite;
-        }
-      `}</style>
         </>
     );
 }
