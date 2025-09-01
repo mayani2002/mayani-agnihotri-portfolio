@@ -1,36 +1,43 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: light;
-  font-family: var(--font-main);
-  background-color: var(--color-bg-light);
-  color: var(--color-text-light);
-}
+/* Configure dark mode variant for class-based theming */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-kalam: Georgia, serif;
-  --font-qwitcher: cursive;
+  /* Font configurations */
+  --font-main: 'Rubik', sans-serif;
+  --font-kalam: 'Kalam', cursive;
+  --font-qwitcher: 'Qwitcher Grypen', cursive;
 
+  /* Custom colors for light theme */
   --color-primary-light: #60CAD9;
   --color-accent-light: #FF7999;
   --color-bg-light: #FFFFFF;
   --color-text-light: #143659;
   --color-lessimp-light: #CCD6F6;
 
-
+  /* Custom colors for dark theme */
   --color-bg-dark: #251C31;
   --color-primary-dark: #693B93;
   --color-accent-dark: #4F228D;
   --color-text-dark: #FFFFFF;
   --color-lessimp-dark: #8b8b8b;
-
 }
+
+/* Apply light/dark theme variables */
+:root {
+  color-scheme: light;
+  font-family: var(--font-main);
+  --tw-light: initial;
+  --tw-dark: ;
+}
+
 .dark {
   color-scheme: dark;
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-dark);
+  --tw-light: ;
+  --tw-dark: initial;
 }
+
 /* font usages */
 .font-main {
   font-family: var(--font-main);
@@ -43,8 +50,8 @@
 .font-qwitcher {
   font-family: var(--font-qwitcher);
 }
-/* Create utility classes as needed, e.g.: */
 
+/* Create utility classes as needed */
 .text-primary-light {
   color: var(--color-primary-light);
 }

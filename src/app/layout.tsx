@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
+import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from './_utils/ThemeProvider'; // New Import
+
+
+const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
+const kalam = Kalam({
+  subsets: ["latin"], variable: "--font-kalam",
+  weight: "300"
+});
+const qwitcherGrypen = Qwitcher_Grypen({
+  subsets: ["latin"], variable: "--font-qwitcher",
+  weight: "400"
+});
 
 export const metadata: Metadata = {
   title: "Mayani Agnihotri | Software Engineer | Fullstack Developer | React, Node.js & Freelance Projects",
@@ -47,13 +59,29 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
         <meta name="theme-color" content="#FF1493" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  if (!theme) {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  }
+                  document.documentElement.classList.add(theme);
+                } catch (e) {
+                  document.documentElement.classList.add('light');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
-      <body suppressHydrationWarning>
+      <body
+        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable}`}
+        suppressHydrationWarning>
         <ThemeProvider>
-          <main >
-
-            {children}
-          </main>
+          {children}
         </ThemeProvider>
       </body>
     </html>

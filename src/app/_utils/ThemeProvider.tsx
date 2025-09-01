@@ -14,28 +14,48 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
     const [theme, setTheme] = useState<Theme>('light');
+    const [mounted, setMounted] = useState(false);
 
-    // Load theme from local storage on initial render
+    // Only run on client side after mount
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') as Theme;
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
-        }
+        setMounted(true);
+        
+        // Get initial theme (should match what's set in head script)
+        const getInitialTheme = (): Theme => {
+            if (typeof window === 'undefined') return 'light';
+            
+            const savedTheme = localStorage.getItem('theme') as Theme;
+            if (savedTheme) return savedTheme;
+            
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+        
+        const initialTheme = getInitialTheme();
+        setTheme(initialTheme);
     }, []);
 
-    // Update html class and local storage when theme changes
-    useEffect(() => {
+    const applyTheme = (newTheme: Theme) => {
+        if (typeof document === 'undefined') return;
+        
         const root = document.documentElement;
-        root.classList.toggle('dark', theme === 'dark');
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+        
+        // Remove previous theme classes
+        root.classList.remove('light', 'dark');
+        root.classList.add(newTheme);
+        
+        // Store in localStorage
+        localStorage.setItem('theme', newTheme);
     };
 
+    const toggleTheme = () => {
+        if (!mounted) return;
+        
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        applyTheme(newTheme);
+    };
+
+    // No need to hide children since theme is set in head script
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
