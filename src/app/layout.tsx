@@ -58,7 +58,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
-        <meta name="theme-color" content="#FF1493" />
+        <meta name="theme-color" content="#60CAD9" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -78,7 +78,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable}`}
+        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable} surface font-main`}
         suppressHydrationWarning>
         <ThemeProvider>
           {children}

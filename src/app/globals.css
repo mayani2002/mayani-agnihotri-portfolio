@@ -9,19 +9,44 @@
   --font-kalam: 'Kalam', cursive;
   --font-qwitcher: 'Qwitcher Grypen', cursive;
 
-  /* Custom colors for light theme */
+  /* Portfolio Brand Colors */
   --color-primary-light: #60CAD9;
   --color-accent-light: #FF7999;
   --color-bg-light: #FFFFFF;
   --color-text-light: #143659;
   --color-lessimp-light: #CCD6F6;
 
-  /* Custom colors for dark theme */
   --color-bg-dark: #251C31;
   --color-primary-dark: #693B93;
   --color-accent-dark: #4F228D;
   --color-text-dark: #FFFFFF;
   --color-lessimp-dark: #8b8b8b;
+
+  /* UI Component Colors - Using Portfolio Brand Colors */
+  --color-surface: var(--tw-light, #FFFFFF) var(--tw-dark, #1b0933ff);
+  --color-surface-elevated: var(--tw-light, #F8F9FA) var(--tw-dark, #1A0B2E);
+  --color-border: var(--tw-light, #CCD6F6) var(--tw-dark, #693B93);
+  --color-border-hover: var(--tw-light, #60CAD9) var(--tw-dark, #FF7999);
+  
+  /* Text Colors - Using Portfolio Brand Colors */
+  --color-text-primary: var(--tw-light, #143659) var(--tw-dark, #FFFFFF);
+  --color-text-secondary: var(--tw-light, #60CAD9) var(--tw-dark, #CCD6F6);
+  --color-text-muted: var(--tw-light, #8b8b8b) var(--tw-dark, #8b8b8b);
+  
+  /* Interactive Colors - Using Portfolio Brand Colors */
+  --color-hover: var(--tw-light, rgba(96, 202, 217, 0.1)) var(--tw-dark, rgba(105, 59, 147, 0.3));
+  --color-active: var(--tw-light, rgba(96, 202, 217, 0.2)) var(--tw-dark, rgba(105, 59, 147, 0.5));
+  
+  /* Status Colors - Enhanced with Portfolio Brand Colors */
+  --color-success: var(--tw-light, #60CAD9) var(--tw-dark, #60CAD9);
+  --color-warning: var(--tw-light, #FF7999) var(--tw-dark, #FF7999);
+  --color-error: var(--tw-light, #DC2626) var(--tw-dark, #EF4444);
+  --color-info: var(--tw-light, #693B93) var(--tw-dark, #4F228D);
+  
+  /* Shadow Colors - Subtle Portfolio Brand Tints */
+  --shadow-light: 0 1px 3px 0 rgba(20, 54, 89, 0.1);
+  --shadow-medium: 0 4px 6px -1px rgba(20, 54, 89, 0.15);
+  --shadow-large: 0 10px 15px -3px rgba(20, 54, 89, 0.2);
 }
 
 /* Apply light/dark theme variables */
@@ -38,6 +63,119 @@
   --tw-dark: initial;
 }
 
+/* Component Utility Classes */
+.surface {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.surface-elevated {
+  background-color: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+}
+
+.border-themed {
+  border-color: var(--color-border);
+}
+
+.border-themed-hover:hover {
+  border-color: var(--color-border-hover);
+}
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.hover-surface:hover {
+  background-color: var(--color-hover);
+}
+
+.active-surface:active {
+  background-color: var(--color-active);
+}
+
+/* Button Component Classes - Enhanced with Portfolio Brand Colors */
+.btn-base {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid var(--color-border);
+}
+
+.btn-primary {
+  background-color: var(--color-primary-light);
+  color: white;
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-small);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-1px);
+}
+
+.dark .btn-primary {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.dark .btn-primary:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+}
+
+/* Secondary button with accent color */
+.btn-secondary {
+  background-color: var(--color-accent-light);
+  color: white;
+  border-color: var(--color-accent-light);
+  box-shadow: var(--shadow-small);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-1px);
+}
+
+.dark .btn-secondary {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.dark .btn-secondary:hover {
+  background-color: var(--color-accent-light);
+  border-color: var(--color-accent-light);
+}
+
+/* Theme Toggle Specific */
+.theme-toggle {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+  transition: all 0.2s ease-in-out;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+}
+
 /* font usages */
 .font-main {
   font-family: var(--font-main);
@@ -52,12 +190,102 @@
 }
 
 /* Create utility classes as needed */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
 .text-primary-light {
   color: var(--color-primary-light);
 }
 
 .text-primary-dark {
   color: var(--color-primary-dark);
+}
+
+.border-primary {
+  border-color: var(--color-primary-light);
+}
+
+.dark .border-primary {
+  border-color: var(--color-primary-dark);
+}
+
+.bg-accent {
+  background-color: var(--color-accent-light);
+}
+
+.dark .bg-accent {
+  background-color: var(--color-accent-dark);
+}
+
+/* Additional Portfolio Brand Color Utilities */
+.text-brand-primary {
+  color: var(--color-primary-light);
+}
+
+.dark .text-brand-primary {
+  color: var(--color-primary-dark);
+}
+
+.text-brand-accent {
+  color: var(--color-accent-light);
+}
+
+.dark .text-brand-accent {
+  color: var(--color-accent-dark);
+}
+
+.bg-brand-primary {
+  background-color: var(--color-primary-light);
+}
+
+.dark .bg-brand-primary {
+  background-color: var(--color-primary-dark);
+}
+
+.bg-brand-accent {
+  background-color: var(--color-accent-light);
+}
+
+.dark .bg-brand-accent {
+  background-color: var(--color-accent-dark);
+}
+
+.border-brand-primary {
+  border-color: var(--color-primary-light);
+}
+
+.dark .border-brand-primary {
+  border-color: var(--color-primary-dark);
+}
+
+.border-brand-accent {
+  border-color: var(--color-accent-light);
+}
+
+.dark .border-brand-accent {
+  border-color: var(--color-accent-dark);
+}
+
+/* Gradient backgrounds using portfolio colors */
+.bg-gradient-brand {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+}
+
+.dark .bg-gradient-brand {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-accent-dark));
+}
+
+.bg-gradient-brand-subtle {
+  background: linear-gradient(135deg, rgba(96, 202, 217, 0.1), rgba(255, 121, 153, 0.1));
+}
+
+.dark .bg-gradient-brand-subtle {
+  background: linear-gradient(135deg, rgba(105, 59, 147, 0.2), rgba(79, 34, 141, 0.2));
 }
 
 /* Custom animations */
@@ -99,5 +327,83 @@
 
 .dark .sidebar-scroll::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-primary-light);
+}
+
+/* Sidebar Component Classes */
+.sidebar-surface {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.sidebar-button {
+  background-color: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-button:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-border-hover);
+}
+
+.social-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--color-primary-light);
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.dark .social-icon {
+  background-color: var(--color-primary-dark);
+}
+
+.dark .social-icon:hover {
+  background-color: var(--color-primary-light);
+}
+
+.info-label {
+  background-color: var(--color-accent-light);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.dark .info-label {
+  background-color: var(--color-accent-dark);
+}
+
+.info-value {
+  color: var(--color-text-primary);
+  font-size: 0.75rem;
+  text-align: right;
+  word-break: break-words;
+}
+
+/* Shadow utility classes */
+.shadow-small {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-large {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 

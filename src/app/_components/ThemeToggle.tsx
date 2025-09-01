@@ -10,13 +10,13 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="p-2 rounded-full border border-gray-400 dark:border-gray-500 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-200"
+            className="theme-toggle"
             aria-label="Toggle theme"
         >
             {theme === 'light' ? (
-                <FaMoon size={20} />
+                <FaMoon size={16} />
             ) : (
-                <FaSun size={20} />
+                <FaSun size={16} />
             )}
         </button>
     );

@@ -19,37 +19,37 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     // Only run on client side after mount
     useEffect(() => {
         setMounted(true);
-        
+
         // Get initial theme (should match what's set in head script)
         const getInitialTheme = (): Theme => {
             if (typeof window === 'undefined') return 'light';
-            
+
             const savedTheme = localStorage.getItem('theme') as Theme;
             if (savedTheme) return savedTheme;
-            
+
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         };
-        
+
         const initialTheme = getInitialTheme();
         setTheme(initialTheme);
     }, []);
 
     const applyTheme = (newTheme: Theme) => {
         if (typeof document === 'undefined') return;
-        
+
         const root = document.documentElement;
-        
+
         // Remove previous theme classes
         root.classList.remove('light', 'dark');
         root.classList.add(newTheme);
-        
+
         // Store in localStorage
         localStorage.setItem('theme', newTheme);
     };
 
     const toggleTheme = () => {
         if (!mounted) return;
-        
+
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
         applyTheme(newTheme);

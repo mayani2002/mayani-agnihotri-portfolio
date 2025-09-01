@@ -27,7 +27,7 @@ export default function RightVerticalNav() {
     return (
         <>
             {/* Mobile Bottom Nav */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-600 md:hidden z-50">
+            <nav className="fixed bottom-0 left-0 right-0 surface border-t border-themed md:hidden z-50">
                 <ul className="flex justify-around items-center max-w-screen-md mx-auto py-2">
                     {navLinks.map(({ href, icon, label, color }) => (
                         <li key={label} className="relative group">
@@ -36,26 +36,26 @@ export default function RightVerticalNav() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={label}
-                                className={`flex flex-col items-center justify-center px-3 py-1 ${color} hover:text-white hover:bg-blue-600 dark:hover:bg-blue-500 rounded-lg transition-colors duration-300`}
+                                className={`flex flex-col items-center justify-center px-3 py-1 ${color} hover-surface rounded-lg transition-all duration-300 hover:scale-105`}
                             >
                                 {icon}
                                 <span className="sr-only">{label}</span>
                             </Link>
                             {/* Tooltip for mobile (above icons) */}
-                            <span className="absolute bottom-full mb-1 left-1/2 transform -translate-x-1/2 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 px-2 py-1 rounded bg-gray-800 dark:bg-gray-700 text-white text-xs whitespace-nowrap pointer-events-none z-50">
+                            <span className="absolute bottom-full mb-1 left-1/2 transform -translate-x-1/2 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 px-2 py-1 rounded surface-elevated text-primary text-xs whitespace-nowrap pointer-events-none z-50 shadow-medium">
                                 {label}
                             </span>
                         </li>
                     ))}
                     {/* Theme Toggle with circular border */}
-                    <li className="flex items-center justify-center p-2 rounded-full border border-gray-400 dark:border-gray-500 hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-300">
+                    <li className="flex items-center justify-center p-2 rounded-full border-themed border-themed-hover transition-colors duration-300">
                         <ThemeToggle />
                     </li>
                 </ul>
             </nav>
 
             {/* Desktop Vertical Nav */}
-            <nav className="hidden md:flex flex-col fixed right-4 top-1/2 transform -translate-y-1/2 p-1 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg max-w-[72px] max-h-screen overflow-y-auto">
+            <nav className="hidden md:flex flex-col fixed right-4 top-1/2 transform -translate-y-1/2 p-1 z-50 surface-elevated border-themed rounded-xl shadow-large max-w-[72px] max-h-screen overflow-y-auto">
                 <div className="mb-2">
                     <ThemeToggle />
                 </div>
@@ -67,12 +67,12 @@ export default function RightVerticalNav() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={label}
-                                className={`p-3 rounded-full ${color} hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white transition-colors duration-300 flex items-center justify-center`}
+                                className={`p-3 rounded-full ${color} hover-surface transition-all duration-300 flex items-center justify-center hover:scale-110`}
                             >
                                 {icon}
                             </Link>
                             {/* Tooltip on right side */}
-                            <span className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 bg-gray-800 dark:bg-gray-700 text-white text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap z-50 shadow-lg">
+                            <span className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 surface-elevated text-primary text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap z-50 shadow-medium">
                                 {label}
                             </span>
                         </li>

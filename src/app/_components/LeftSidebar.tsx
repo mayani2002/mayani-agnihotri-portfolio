@@ -23,7 +23,7 @@ export default function LeftSidebar() {
                 <button
                     aria-label="Open sidebar"
                     onClick={() => setIsOpen(true)}
-                    className="fixed top-3 left-3 md:top-4 md:left-4 bg-white dark:bg-[var(--color-bg-dark)] hover:bg-gray-100 dark:hover:bg-gray-700 text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] rounded-full p-2 shadow-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-40"
+                    className="fixed top-3 left-3 md:top-4 md:left-4 sidebar-button shadow-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-primary z-40"
                 >
                     <FaBars size={16} />
                 </button>
@@ -31,8 +31,8 @@ export default function LeftSidebar() {
 
             <aside
                 className={`
-          fixed top-0 left-0 h-screen bg-white dark:bg-[var(--color-bg-dark)]
-          rounded-r-3xl shadow-xl flex flex-col py-3 px-5 z-50
+          fixed top-0 left-0 h-screen sidebar-surface
+          rounded-r-3xl shadow-large flex flex-col py-3 px-5 z-50
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           
@@ -45,7 +45,7 @@ export default function LeftSidebar() {
                 <button
                     aria-label="Close sidebar"
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-light)] transition-colors duration-200 z-10"
+                    className="absolute top-4 right-4 sidebar-button shadow-small focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-primary z-10"
                 >
                     <FaAngleLeft size={12} />
                 </button>
@@ -55,16 +55,16 @@ export default function LeftSidebar() {
                     {/* Profile Section */}
                     <div className="flex-shrink-0 mb-4">
                         {/* Profile Image */}
-                        <div className="w-20 h-20 rounded-full mx-auto flex-shrink-0 overflow-hidden border-3 border-[var(--color-primary-light)] mb-3 shadow relative">
+                        <div className="w-20 h-20 rounded-full mx-auto flex-shrink-0 overflow-hidden border-3 border-primary mb-3 shadow-medium relative">
                             <img src="/profile-mayani.jpeg" alt="Mayani Agnihotri Profile" className="w-full h-full object-cover" />
-                            <span className="absolute bottom-0 right-0 w-4 h-4 bg-[var(--color-accent-light)] border-2 border-white rounded-full shadow-lg"></span>
+                            <span className="absolute bottom-0 right-0 w-4 h-4 bg-accent border-2 border-white rounded-full shadow-small"></span>
                         </div>
 
                         {/* Name and Title */}
-                        <h2 className="mt-2 font-kalam text-lg text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] text-center leading-tight">
+                        <h2 className="mt-2 font-kalam text-lg text-primary text-center leading-tight">
                             Mayani Agnihotri
                         </h2>
-                        <h4 className="text-xs font-medium text-gray-500 dark:text-[var(--color-lessimp-light)] mb-3 text-center">
+                        <h4 className="text-xs font-medium text-secondary mb-3 text-center">
                             Software Engineer & Fullstack Developer
                         </h4>
                     </div>
@@ -76,12 +76,7 @@ export default function LeftSidebar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="GitHub Profile"
-                            className="
-                    w-7 h-7 flex items-center justify-center rounded-full 
-                    bg-[var(--color-primary-light)] text-white 
-                    hover:bg-[var(--color-primary-dark)] 
-                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
-                    transition-colors duration-200"
+                            className="social-icon"
                         >
                             <FaGithub size={14} />
                         </a>
@@ -90,12 +85,7 @@ export default function LeftSidebar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="LinkedIn Profile"
-                            className="
-                    w-7 h-7 flex items-center justify-center rounded-full 
-                    bg-[var(--color-primary-light)] text-white 
-                    hover:bg-[var(--color-primary-dark)] 
-                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
-                    transition-colors duration-200"
+                            className="social-icon"
                         >
                             <FaLinkedinIn size={14} />
                         </a>
@@ -104,24 +94,14 @@ export default function LeftSidebar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="X Profile"
-                            className="
-                    w-7 h-7 flex items-center justify-center rounded-full 
-                    bg-[var(--color-primary-light)] text-white 
-                    hover:bg-[var(--color-primary-dark)] 
-                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
-                    transition-colors duration-200"
+                            className="social-icon"
                         >
                             <FaXTwitter size={14} />
                         </a>
                         <a
                             href="mailto:mayani.agni01@gmail.com"
                             aria-label="Email Contact"
-                            className="
-                    w-7 h-7 flex items-center justify-center rounded-full 
-                    bg-[var(--color-primary-light)] text-white 
-                    hover:bg-[var(--color-primary-dark)] 
-                    dark:bg-[var(--color-primary-dark)] dark:hover:bg-[var(--color-primary-light)]
-                    transition-colors duration-200"
+                            className="social-icon"
                         >
                             <FaEnvelope size={14} />
                         </a>
@@ -138,10 +118,10 @@ export default function LeftSidebar() {
                                 ["Email:", "mayani.agni01@gmail.com"],
                             ].map(([label, value], idx) => (
                                 <div key={idx} className="flex justify-between items-center gap-2">
-                                    <span className="bg-[var(--color-accent-light)] dark:bg-[var(--color-accent-dark)] text-white px-2  rounded text-xs font-semibold flex-shrink-0">
+                                    <span className="info-label">
                                         {label}
                                     </span>
-                                    <span className="text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] text-right text-xs break-words">
+                                    <span className="info-value">
                                         {value}
                                     </span>
                                 </div>
@@ -154,12 +134,7 @@ export default function LeftSidebar() {
                         <a
                             href="/Mayani-Agnihotri-Resume.pdf"
                             download="Mayani-Agnihotri-Resume.pdf"
-                            className="
-                    bg-green-700 hover:bg-green-800 text-white font-semibold 
-                    px-4 py-2 rounded-full shadow-md text-center transition-colors duration-200
-                    dark:bg-green-600 dark:hover:bg-green-700
-                    w-full select-none text-sm block
-                  "
+                            className="bg-green-700 hover:bg-green-800 text-white font-semibold px-4 py-2 rounded-full shadow-medium text-center transition-colors duration-200 dark:bg-green-600 dark:hover:bg-green-700 w-full select-none text-sm block"
                         >
                             Download Resume
                         </a>
