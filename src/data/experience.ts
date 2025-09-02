@@ -16,54 +16,74 @@ export interface WorkExperience {
 export const workExperience: WorkExperience[] = [
     {
         id: "exp-1",
-        company: "Tech Startup XYZ",
-        position: "Fullstack Developer",
-        location: "Remote, India",
+        company: "Lauren Information Technologies",
+        position: "Backend Developer",
+        location: "Mumbai, India",
         type: "Full-time",
-        startDate: "2023-06",
-        endDate: "Present",
-        description: "Lead development of web applications using React, Node.js, and modern technologies. Collaborated with cross-functional teams to deliver scalable solutions.",
+        startDate: "2024-06",
+        endDate: "2025-06",
+        description: "Independently designed and implemented complex backend solutions for a platform serving 100K+ users. Led development of real-time dashboards and distributed microservices architecture.",
         achievements: [
-            "Built and deployed 3+ full-stack web applications",
-            "Improved application performance by 40% through optimization",
-            "Implemented CI/CD pipelines reducing deployment time by 60%",
-            "Mentored 2 junior developers on best practices"
+            "Designed and implemented recursive MongoDB aggregation pipelines to fetch complex graph data",
+            "Built APIs and created SQL queries that store and retrieve data from 100K+ users on the platform",
+            "Developed a real-time dashboard with Apache Superset, optimizing data visualization for business insights",
+            "Contributed to building a distributed notification microservice using messaging queues to handle 5K+ messages/day"
         ],
-        technologies: ["React", "Node.js", "TypeScript", "MongoDB", "AWS", "Docker"],
-        companyWebsite: "https://example-startup.com"
+        technologies: ["Node.js", "MongoDB", "SQL", "Apache Superset", "RabbitMQ", "Microservices", "WebSockets"],
+        companyWebsite: "https://laureninfotech.com"
     },
     {
         id: "exp-2",
-        company: "Freelance Projects",
-        position: "Freelance Developer",
-        location: "Remote",
-        type: "Freelance",
-        startDate: "2022-08",
-        endDate: "Present",
-        description: "Providing fullstack development services to various clients worldwide, building custom web solutions and applications.",
+        company: "Shoemato, Easybiznus",
+        position: "Core Contributor (Software Development)",
+        location: "Remote, India",
+        type: "Contract",
+        startDate: "2024-07",
+        endDate: "2025-01",
+        description: "Led backend development for a multi-vendor B2B footwear platform serving retailers and wholesalers. Architected scalable solutions for inventory management and order routing systems.",
         achievements: [
-            "Successfully delivered 10+ client projects on time",
-            "Maintained 5-star rating across platforms",
-            "Generated $15K+ in freelance revenue",
-            "Built long-term relationships with repeat clients"
+            "Led backend development for a multi-vendor B2B footwear platform",
+            "Built SKU-level inventory management system for multiple vendors",
+            "Implemented vendor mapping and smart order routing to the nearest high-profit vendor",
+            "Designed scalable architecture for B2B marketplace operations"
         ],
-        technologies: ["React", "Next.js", "Node.js", "Python", "PostgreSQL", "Vercel"]
+        technologies: ["Node.js", "Express.js", "MongoDB", "MySQL", "REST APIs", "System Design"],
+        companyWebsite: "https://shoemato.com"
     },
     {
         id: "exp-3",
-        company: "Previous Company",
-        position: "Junior Developer",
-        location: "India",
-        type: "Full-time",
-        startDate: "2022-01",
-        endDate: "2023-05",
-        description: "Worked as part of the development team building web applications and APIs.",
+        company: "Jamrio",
+        position: "Backend Developer Intern",
+        location: "Bengaluru, India",
+        type: "Internship",
+        startDate: "2023-06",
+        endDate: "2023-10",
+        description: "Developed RESTful APIs and core backend logic for a startup's matchmaking platform. Enhanced platform responsiveness and implemented cloud storage solutions.",
         achievements: [
-            "Contributed to multiple feature releases",
-            "Fixed 50+ bugs and improved code quality",
-            "Participated in code reviews and knowledge sharing",
-            "Learned industry best practices and agile methodology"
+            "Developed RESTful APIs using Node.js and Sequelize for matchmaking platform",
+            "Created core logic for matchmaking and swipe features",
+            "Collaborated with team to develop scalable backend for FCM notifications and platform subscription",
+            "Enhanced platform responsiveness through WebSocket integration and AWS S3 media storage"
         ],
-        technologies: ["JavaScript", "React", "Express.js", "MySQL", "Git"]
-    }
+        technologies: ["Node.js", "Sequelize", "REST APIs", "WebSockets", "AWS S3", "FCM", "JavaScript"],
+        companyWebsite: "https://jamrio.com"
+    },
+    // {
+    //     id: "exp-4",
+    //     company: "Shastra Coding Club, TCET",
+    //     position: "Chairperson",
+    //     location: "Mumbai, India",
+    //     type: "Part-time",
+    //     startDate: "2022-05",
+    //     endDate: "2023-06",
+    //     description: "Led a 45-member technical team, organizing multiple coding contests and mentoring students in competitive programming and data structures & algorithms.",
+    //     achievements: [
+    //         "Led a 45-member team, organizing 14+ college coding contests with 700+ participants",
+    //         "Mentored junior students in Data Structures and Algorithms",
+    //         "Shared resources and DSA questions with over 2,000+ students via Shastra WhatsApp community",
+    //         "Built and managed the technical community for competitive programming at college level"
+    //     ],
+    //     technologies: ["Leadership", "Community Management", "Competitive Programming", "DSA", "Mentoring"],
+    //     companyWebsite: "https://tcetmumbai.in"
+    // }
 ];

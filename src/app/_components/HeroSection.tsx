@@ -63,15 +63,15 @@ export const HeroSection: React.FC = () => {
         <ComponentErrorBoundary componentName="Hero Section">
             <section
                 id="hero"
-                className="min-h-screen flex items-center justify-center relative overflow-hidden hero-bg"
+                className="min-h-screen flex items-center justify-center relative  hero-bg"
             >
                 {/* Background Gradient - Much Darker with High Pigment */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-slate-900 dark:via-violet-900 dark:to-purple-900" />
 
                 {/* Enhanced Circular Gradients - Higher Pigment in Dark Mode */}
-                <div className="absolute top-20 left-20 w-96 h-96 bg-indigo-400/8 dark:bg-violet-800/30 rounded-full blur-3xl" />
-                <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-800/4 dark:bg-fuchsia-400/25 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-300/3 dark:bg-violet-300/20 rounded-full blur-3xl" />
+                {/* <div className="absolute top-20 left-20 w-96 h-96 bg-indigo-400/8 dark:bg-violet-800/30 rounded-full blur-3xl" /> */}
+                {/* <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-800/4 dark:bg-fuchsia-400/25 rounded-full blur-3xl" /> */}
+                {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-300/3 dark:bg-violet-300/20 rounded-full blur-3xl" /> */}
 
                 {/* Background Pattern/Texture */}
                 <div
@@ -81,9 +81,9 @@ export const HeroSection: React.FC = () => {
                     }}
                 />
 
-                {/* Main Content Container - Good margins on all sides */}
-                <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-screen flex items-center">
-                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full mx-4 sm:mx-8 lg:mx-12">
+                {/* Main Content Container - Margins handled by page layout */}
+                <div className="relative z-10 h-screen flex items-center">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
 
                         {/* Left Side - Text Content */}
                         <div className="hero-text-primary space-y-2 lg:space-y-3 text-center lg:text-left order-2 lg:order-1">
@@ -132,7 +132,7 @@ export const HeroSection: React.FC = () => {
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
-                                    Hire Me 
+                                    Hire Me
                                 </a>
 
                                 {/* View Resume Button - Removed slow transition */}
