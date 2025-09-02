@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
 import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from './_utils/ThemeProvider'; // New Import
+
+// Component imports
+import { ThemeProvider } from './_utils/ThemeProvider';
 import { ErrorBoundary } from './_components/ErrorBoundary';
 import { PerformanceAnalytics, PerformanceDebugger } from './_components/PerformanceAnalytics';
 import { SEOValidator, AccessibilityValidator, PerformanceBudget, DevConsoleCommands } from './_components/DevUtils';
 
+// App configuration
+const APP_CONFIG = {
+  name: 'Mayani Agnihotri Portfolio',
+  author: 'Mayani Agnihotri',
+  description: 'Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems. Experienced in startups, freelancing, and building end-to-end products. Open to SDE-1 opportunities at top tech companies and freelance collaborations worldwide.',
+  url: 'https://mayani-agnihotri.vercel.app'
+} as const;
+
 
 const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
 const kalam = Kalam({
-  subsets: ["latin"], variable: "--font-kalam",
+  subsets: ["latin", "devanagari"], variable: "--font-kalam",
   weight: "300"
 });
 const qwitcherGrypen = Qwitcher_Grypen({
@@ -19,10 +29,10 @@ const qwitcherGrypen = Qwitcher_Grypen({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mayani Agnihotri | Software Engineer | Fullstack Developer",
-    template: "%s | Mayani Agnihotri"
+    default: `${APP_CONFIG.author} | Software Engineer | Fullstack Developer`,
+    template: `%s | ${APP_CONFIG.author}`
   },
-  description: "Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems. Experienced in startups, freelancing, and building end-to-end products. Open to SDE-1 opportunities at top tech companies and freelance collaborations worldwide.",
+  description: APP_CONFIG.description,
   keywords: "Mayani Agnihotri, Software Engineer, Fullstack Developer, React Developer, Node.js Developer, JavaScript Engineer, Python Developer, Freelance Software Developer, Frontend Engineer, Backend Engineer, SDE-1 Portfolio, Web Developer, API Development, Startup Developer, ATS Friendly Resume, Product Development, Hackathon Winner",
   authors: [{ name: "Mayani Agnihotri", url: "https://mayani-agnihotri.vercel.app" }],
   creator: "Mayani Agnihotri",

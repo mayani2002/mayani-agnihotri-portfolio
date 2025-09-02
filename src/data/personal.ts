@@ -16,6 +16,25 @@ export interface PersonalInfo {
     };
     profileImage: string;
     resumeUrl: string;
+    // Hero section specific data
+    hero: {
+        greeting: string;
+        name: string;
+        highlightedName?: string; // For colored part of name
+        profession: string;
+        subtitle: string;
+        catchPhrase: {
+            main: string;
+            highlighted: string;
+            suffix: string;
+        };
+        description: string;
+        currentRole?: {
+            title: string;
+            company: string;
+            companyUrl?: string;
+        };
+    };
     socialLinks: {
         github: string;
         linkedin: string;
@@ -46,6 +65,25 @@ export const personalInfo: PersonalInfo = {
     },
     profileImage: "/profile-mayani.jpeg",
     resumeUrl: "/Mayani-Agnihotri-Resume.pdf",
+    // Hero section data based on the design
+    hero: {
+        greeting: "Hello! I Am",
+        name: "Mayani Agnihotri",
+        highlightedName: "Mayani Agnihotri", // This will be styled differently
+        profession: "",
+        subtitle: "I'm a Software Engineer.",
+        catchPhrase: {
+            highlighted: "Code",
+            main: " is my design language",
+            suffix: "!"
+        },
+        description: "I love crafting solutions that balance performance, clarity, and user experience.",
+        currentRole: {
+            title: "Software Engineer",
+            company: "Facebook",
+            companyUrl: "https://facebook.com"
+        }
+    },
     socialLinks: {
         github: "https://github.com/mayani2002",
         linkedin: "https://www.linkedin.com/in/mayani-agnihotri/",

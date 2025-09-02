@@ -97,7 +97,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         placeholder,
         blurDataURL,
         sizes,
-        loading,
+        // Only include loading prop if priority is false (Next.js doesn't allow both)
+        ...(priority ? {} : { loading }),
         onLoad: handleLoad,
         onError: handleError,
         className: `${className} ${!imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`,

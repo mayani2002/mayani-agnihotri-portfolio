@@ -2,22 +2,26 @@
 const nextConfig = {
     // Image optimization settings - Next.js automatically optimizes images for better performance
     images: {
-        // Configure external image domains that are allowed to be optimized
-        // Add any external image sources you plan to use (GitHub, Unsplash, etc.)
-        domains: [
-            'images.unsplash.com',
-            'avatars.githubusercontent.com',
-            'raw.githubusercontent.com',
-        ],
-
-        // More flexible pattern matching for external images
-        // This allows images from subdomains and various paths
+        // Configure external image domains using the modern remotePatterns configuration
+        // This replaces the deprecated 'domains' array
         remotePatterns: [
             {
                 protocol: 'https',
                 hostname: '**.unsplash.com', // Allows any Unsplash subdomain
                 port: '',
                 pathname: '/**', // Allows any path
+            },
+            {
+                protocol: 'https',
+                hostname: 'avatars.githubusercontent.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'raw.githubusercontent.com',
+                port: '',
+                pathname: '/**',
             },
             {
                 protocol: 'https',
