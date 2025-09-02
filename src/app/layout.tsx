@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from './_utils/ThemeProvider'; // New Import
+import { ErrorBoundary } from './_components/ErrorBoundary';
+import { PerformanceAnalytics, PerformanceDebugger } from './_components/PerformanceAnalytics';
+import { SEOValidator, AccessibilityValidator, PerformanceBudget, DevConsoleCommands } from './_components/DevUtils';
 
 
 const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
@@ -15,18 +18,29 @@ const qwitcherGrypen = Qwitcher_Grypen({
 });
 
 export const metadata: Metadata = {
-  title: "Mayani Agnihotri | Software Engineer | Fullstack Developer | React, Node.js & Freelance Projects",
+  title: {
+    default: "Mayani Agnihotri | Software Engineer | Fullstack Developer",
+    template: "%s | Mayani Agnihotri"
+  },
   description: "Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems. Experienced in startups, freelancing, and building end-to-end products. Open to SDE-1 opportunities at top tech companies and freelance collaborations worldwide.",
   keywords: "Mayani Agnihotri, Software Engineer, Fullstack Developer, React Developer, Node.js Developer, JavaScript Engineer, Python Developer, Freelance Software Developer, Frontend Engineer, Backend Engineer, SDE-1 Portfolio, Web Developer, API Development, Startup Developer, ATS Friendly Resume, Product Development, Hackathon Winner",
-  authors: [{ name: "Mayani Agnihotri" }],
+  authors: [{ name: "Mayani Agnihotri", url: "https://mayani-agnihotri.vercel.app" }],
   creator: "Mayani Agnihotri",
   publisher: "Mayani Agnihotri",
+  alternates: {
+    canonical: "https://mayani-agnihotri.vercel.app",
+    languages: {
+      'en-US': 'https://mayani-agnihotri.vercel.app',
+    },
+  },
   robots: {
     index: true,
     follow: true,
+    nocache: true,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -39,12 +53,34 @@ export const metadata: Metadata = {
     title: 'Mayani Agnihotri | Software Engineer | Fullstack Developer',
     description: 'Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems.',
     siteName: 'Mayani Agnihotri Portfolio',
+    images: [
+      {
+        url: 'https://mayani-agnihotri.vercel.app/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Mayani Agnihotri - Software Engineer Portfolio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@mayani_agnihotri',
+    creator: '@mayani_agnihotri',
     title: 'Mayani Agnihotri | Software Engineer | Fullstack Developer',
     description: 'Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems.',
-    creator: '@mayani_agnihotri',
+    images: ['https://mayani-agnihotri.vercel.app/og-image.jpg'],
+  },
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    yahoo: 'your-yahoo-verification-code',
+  },
+  category: 'technology',
+  classification: 'Portfolio Website',
+  other: {
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'mobile-web-app-capable': 'yes',
   },
 };
 
@@ -58,7 +94,18 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#60CAD9" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        {/* Performance and Preloads */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+
+        {/* Theme Script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -76,13 +123,87 @@ export default function RootLayout({
             `,
           }}
         />
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Mayani Agnihotri",
+              "jobTitle": "Software Engineer & Fullstack Developer",
+              "description": "Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems.",
+              "url": "https://mayani-agnihotri.vercel.app",
+              "image": "https://mayani-agnihotri.vercel.app/profile-mayani.jpeg",
+              "email": "mayani.agni01@gmail.com",
+              "address": {
+                "@type": "Place",
+                "addressCountry": "India"
+              },
+              "sameAs": [
+                "https://github.com/mayani2002",
+                "https://www.linkedin.com/in/mayani-agnihotri/",
+                "https://x.com/mayani_agnihotri"
+              ],
+              "knowsAbout": [
+                "React",
+                "Node.js",
+                "JavaScript",
+                "TypeScript",
+                "Python",
+                "Full-Stack Development",
+                "Web Development",
+                "Software Engineering"
+              ],
+              "hasOccupation": {
+                "@type": "Occupation",
+                "name": "Software Engineer",
+                "occupationLocation": {
+                  "@type": "Country",
+                  "name": "India"
+                },
+                "skills": "React, Node.js, JavaScript, TypeScript, Python, MongoDB, PostgreSQL, AWS"
+              }
+            })
+          }}
+        />
+
+        {/* Website Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Mayani Agnihotri Portfolio",
+              "description": "Professional portfolio showcasing software engineering projects and expertise",
+              "url": "https://mayani-agnihotri.vercel.app",
+              "author": {
+                "@type": "Person",
+                "name": "Mayani Agnihotri"
+              },
+              "inLanguage": "en-US",
+              "copyrightYear": "2024",
+              "genre": "Portfolio"
+            })
+          }}
+        />
       </head>
       <body
         className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable} surface font-main`}
         suppressHydrationWarning>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider>
+            {/* <PerformanceAnalytics /> */}
+            {/* <PerformanceDebugger /> */}
+            <SEOValidator />
+            <AccessibilityValidator />
+            <PerformanceBudget />
+            <DevConsoleCommands />
+            {children}
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );
