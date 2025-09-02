@@ -63,23 +63,8 @@ export const HeroSection: React.FC = () => {
         <ComponentErrorBoundary componentName="Hero Section">
             <section
                 id="hero"
-                className="min-h-screen flex items-center justify-center relative  hero-bg"
+                className="min-h-screen flex items-center justify-center relative"
             >
-                {/* Background Gradient - Much Darker with High Pigment */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-slate-900 dark:via-violet-900 dark:to-purple-900" />
-
-                {/* Enhanced Circular Gradients - Higher Pigment in Dark Mode */}
-                {/* <div className="absolute top-20 left-20 w-96 h-96 bg-indigo-400/8 dark:bg-violet-800/30 rounded-full blur-3xl" /> */}
-                {/* <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-800/4 dark:bg-fuchsia-400/25 rounded-full blur-3xl" /> */}
-                {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-300/3 dark:bg-violet-300/20 rounded-full blur-3xl" /> */}
-
-                {/* Background Pattern/Texture */}
-                <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.05'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-                    }}
-                />
 
                 {/* Main Content Container - Margins handled by page layout */}
                 <div className="relative z-10 h-screen flex items-center">

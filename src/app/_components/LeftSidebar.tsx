@@ -1,11 +1,19 @@
 
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaXTwitter, FaLinkedinIn, FaGithub, FaBars, FaAngleLeft, FaEnvelope } from "react-icons/fa6";
 
-export default function LeftSidebar() {
-    // Start closed on mobile for better UX, open on desktop will be handled by CSS
-    const [isOpen, setIsOpen] = useState(false);
+interface LeftSidebarProps {
+    isOpen?: boolean;
+    setIsOpen?: (isOpen: boolean) => void;
+}
+
+export default function LeftSidebar({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }: LeftSidebarProps) {
+    // Use internal state as fallback, external state takes priority
+    const [internalIsOpen, setInternalIsOpen] = useState(false);
+
+    const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+    const setIsOpen = externalSetIsOpen || setInternalIsOpen;
 
     return (
         <>
@@ -28,16 +36,19 @@ export default function LeftSidebar() {
                 📄 Resume
             </a>
 
-            {/* Hamburger button when sidebar is closed - better positioning for mobile */}
-            {!isOpen && (
-                <button
-                    aria-label="Open sidebar"
-                    onClick={() => setIsOpen(true)}
-                    className="fixed top-3 left-3 md:top-4 md:left-4 sidebar-button shadow-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-primary z-40"
-                >
-                    <FaBars size={16} />
-                </button>
-            )}
+            {/* Hamburger button - Always visible toggle */}
+            <button
+                aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
+                onClick={() => setIsOpen(!isOpen)}
+                className={`
+                    fixed top-3 left-3 md:top-4 sidebar-button shadow-medium 
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-primary z-40
+                    transition-all duration-300 ease-in-out
+                    ${isOpen ? 'md:left-[260px]' : 'md:left-4'}
+                `}
+            >
+                {isOpen ? <FaAngleLeft size={16} /> : <FaBars size={16} />}
+            </button>
 
             <aside
                 className={`
@@ -48,18 +59,10 @@ export default function LeftSidebar() {
           
           w-72 md:w-64 
           overflow-y-auto overflow-x-hidden
+          md:rounded-r-lg
         `}
                 aria-label="Sidebar Navigation"
             >
-                {/* Close Button - positioned well inside sidebar frame */}
-                <button
-                    aria-label="Close sidebar"
-                    onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 sidebar-button shadow-small focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-primary z-10"
-                >
-                    <FaAngleLeft size={12} />
-                </button>
-
                 {/* Scrollable Content Container */}
                 <div className="flex-1 flex flex-col pt-8 pb-3 min-h-0">
                     {/* Profile Section */}
