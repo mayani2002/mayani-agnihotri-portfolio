@@ -203,6 +203,13 @@ export default function RootLayout({
       <body
         className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable} surface font-main`}
         suppressHydrationWarning>
+        {/* Skip Navigation Link - Must be first element for accessibility */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[10000] bg-purple-600 text-white px-4 py-2 rounded-md font-medium shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:ring-offset-2"
+        >
+          Skip to main content
+        </a>
         <ErrorBoundary>
           <ThemeProvider>
             {/* <PerformanceAnalytics /> */}

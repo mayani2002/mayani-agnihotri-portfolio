@@ -30,12 +30,15 @@ export const Home: React.FC = () => {
       <RightVerticalNav />
 
       {/* Main Content with Dynamic Margins */}
-      <main className={`
-        relative mx-auto transition-all duration-300 ease-in-out
-        px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-20
-        ${isDesktop && isSidebarOpen ? 'md:ml-64 max-w-5xl' : 'max-w-6xl'}
-        md:mr-24 lg:mr-20
-      `}>
+      <main
+        id="main"
+        className={`
+          relative mx-auto transition-all duration-300 ease-in-out
+          px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-20
+          ${isDesktop && isSidebarOpen ? 'md:ml-64 max-w-5xl' : 'max-w-6xl'}
+          md:mr-24 lg:mr-20
+        `}
+      >
         {/* Hero Section - Full Screen */}
         <HeroSection />
 
