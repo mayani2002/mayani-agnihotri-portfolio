@@ -12,20 +12,58 @@ const ProjectsSection: React.FC = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [expandedTechs, setExpandedTechs] = useState<Set<string>>(new Set());
     const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
+    const [showAllDesktop, setShowAllDesktop] = useState<boolean>(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const [isInViewport, setIsInViewport] = useState<boolean>(false);
+    const [cardsPerRow, setCardsPerRow] = useState<number>(2); // Default estimate for projects
     const sectionRef = useRef<HTMLElement>(null);
 
-    // Check if mobile screen
+    // Check screen size and calculate cards per row dynamically for projects
     useEffect(() => {
-        const checkIsMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+        const calculateProjectCardsPerRow = () => {
+            const width = window.innerWidth;
+            const isMobileSize = width < 768;
+            
+            if (isMobileSize) {
+                return 1; // Mobile and tablet show 1 project per row
+            }
+            
+            // Calculate based on project grid CSS auto-fit logic
+            // Using minmax values for projects: minmax(350px-400px, 1fr)
+            let minCardWidth = 350;
+            let gap = 24; // 1.5rem = 24px
+            
+            // Adjust based on CSS breakpoints for projects
+            if (width >= 1400) {
+                minCardWidth = 380;
+                gap = 24; // 1.5rem
+            } else if (width >= 1025) {
+                minCardWidth = 350;
+                gap = 24;
+            } else {
+                // Tablet and below show 1 per row
+                return 1;
+            }
+            
+            // Calculate container width (accounting for padding)
+            const containerPadding = width < 640 ? 32 : width < 1024 ? 64 : 128;
+            const availableWidth = width - containerPadding;
+            
+            // Calculate how many project cards fit per row
+            const cardsInRow = Math.floor((availableWidth + gap) / (minCardWidth + gap));
+            return Math.max(1, cardsInRow);
         };
 
-        checkIsMobile();
-        window.addEventListener('resize', checkIsMobile);
+        const checkScreenSize = () => {
+            const isMobileSize = window.innerWidth < 768;
+            setIsMobile(isMobileSize);
+            setCardsPerRow(calculateProjectCardsPerRow());
+        };
 
-        return () => window.removeEventListener('resize', checkIsMobile);
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
     // Intersection Observer to detect if section is in viewport
@@ -52,9 +90,10 @@ const ProjectsSection: React.FC = () => {
         };
     }, []);
 
-    // Reset showAllMobile when filter changes
+    // Reset show states when filter changes
     useEffect(() => {
         setShowAllMobile(false);
+        setShowAllDesktop(false);
     }, [selectedFilter]);
 
     // Get unique technologies for filter
@@ -81,15 +120,22 @@ const ProjectsSection: React.FC = () => {
         return [...featured, ...nonFeatured].slice(0, 3);
     }, [filteredProjects]);
 
+    // Get projects for desktop 2-row limit (dynamic based on screen size)
+    const twoRowDesktopProjects = useMemo(() => {
+        const maxProjectsForTwoRows = cardsPerRow * 2;
+        return filteredProjects.slice(0, maxProjectsForTwoRows);
+    }, [filteredProjects, cardsPerRow]);
+
     // Get projects to display based on screen size and show state
     const projectsToDisplay = useMemo(() => {
-        // On mobile, show only featured/recent by default, all when expanded
         if (isMobile) {
+            // On mobile, show only featured/recent by default, all when expanded
             return showAllMobile ? filteredProjects : featuredProjects;
+        } else {
+            // On desktop, show 2 rows by default (dynamic based on screen), all when expanded
+            return showAllDesktop ? filteredProjects : twoRowDesktopProjects;
         }
-        // On desktop, always show all
-        return filteredProjects;
-    }, [filteredProjects, featuredProjects, showAllMobile, isMobile]);
+    }, [filteredProjects, featuredProjects, twoRowDesktopProjects, showAllMobile, showAllDesktop, isMobile]);
 
     const toggleTechExpansion = (projectId: string) => {
         setExpandedTechs(prev => {
@@ -101,6 +147,24 @@ const ProjectsSection: React.FC = () => {
             }
             return newSet;
         });
+    };
+
+    // Handle show more for both mobile and desktop
+    const handleShowMore = () => {
+        if (isMobile) {
+            setShowAllMobile(true);
+        } else {
+            setShowAllDesktop(true);
+        }
+    };
+
+    // Handle show less for both mobile and desktop
+    const handleShowLess = () => {
+        if (isMobile) {
+            setShowAllMobile(false);
+        } else {
+            setShowAllDesktop(false);
+        }
     };
 
     return (
@@ -264,11 +328,12 @@ const ProjectsSection: React.FC = () => {
                     ))}
                 </div>
 
-                {/* 📱 Mobile Show More Button */}
-                {isMobile && !showAllMobile && filteredProjects.length > 3 && (
+                {/* 📱 Show More Button - Mobile & Desktop with Dynamic 2-Row Limit */}
+                {((isMobile && !showAllMobile && filteredProjects.length > 3) || 
+                  (!isMobile && !showAllDesktop && filteredProjects.length > cardsPerRow * 2)) && (
                     <div className="flex justify-center mt-8">
                         <button
-                            onClick={() => setShowAllMobile(true)}
+                            onClick={handleShowMore}
                             className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium transition-all duration-300"
                             style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
                         >
@@ -278,11 +343,13 @@ const ProjectsSection: React.FC = () => {
                     </div>
                 )}
 
-                {/* Floating Show Less Button - Only visible when section is in viewport */}
-                {isMobile && showAllMobile && isInViewport && filteredProjects.length > 3 && (
+                {/* Floating Show Less Button - Mobile & Desktop */}
+                {((isMobile && showAllMobile && filteredProjects.length > 3) || 
+                  (!isMobile && showAllDesktop && filteredProjects.length > cardsPerRow * 2)) && 
+                 isInViewport && (
                     <div className="fixed bottom-20 right-4 z-50">
                         <button
-                            onClick={() => setShowAllMobile(false)}
+                            onClick={handleShowLess}
                             className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium shadow-xl bg-white dark:bg-gray-900 transition-all duration-300"
                             style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
                         >

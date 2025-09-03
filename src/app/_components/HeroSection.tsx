@@ -25,7 +25,8 @@ export const HeroSection: React.FC = () => {
     const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
     // Name variations for alternating animation
-    const nameVariations = {        latin: "Mayani Agnihotri",
+    const nameVariations = {
+        latin: "Mayani Agnihotri",
         devanagari: "मयनी अग्निहोत्री", // Mayani Agnihotri in Devanagari
 
     };

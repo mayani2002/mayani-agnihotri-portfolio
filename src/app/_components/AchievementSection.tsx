@@ -37,20 +37,58 @@ const AchievementSection: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
     const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
+    const [showAllDesktop, setShowAllDesktop] = useState<boolean>(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const [showFloatingButton, setShowFloatingButton] = useState<boolean>(true);
+    const [cardsPerRow, setCardsPerRow] = useState<number>(4); // Default estimate
     const sectionRef = useRef<HTMLElement>(null);
 
-    // Check if mobile screen
+    // Check screen size and calculate cards per row dynamically
     useEffect(() => {
-        const checkIsMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+        const calculateCardsPerRow = () => {
+            const width = window.innerWidth;
+            const isMobileSize = width < 768;
+
+            if (isMobileSize) {
+                return 1; // Mobile always shows 1 card per row
+            }
+
+            // Calculate based on CSS grid auto-fit logic
+            // Using minmax values from CSS: minmax(280px-320px, 1fr)
+            let minCardWidth = 280;
+            let gap = 24; // 1.5rem = 24px
+
+            // Adjust based on CSS breakpoints
+            if (width >= 1400) {
+                minCardWidth = 320;
+                gap = 32; // 2rem
+            } else if (width >= 1025) {
+                minCardWidth = 300;
+                gap = 24;
+            } else if (width >= 641) {
+                minCardWidth = 320;
+                gap = 20;
+            }
+
+            // Calculate container width (accounting for padding)
+            const containerPadding = width < 640 ? 32 : width < 1024 ? 64 : 128;
+            const availableWidth = width - containerPadding;
+
+            // Calculate how many cards fit per row
+            const cardsInRow = Math.floor((availableWidth + gap) / (minCardWidth + gap));
+            return Math.max(1, cardsInRow);
         };
 
-        checkIsMobile();
-        window.addEventListener('resize', checkIsMobile);
+        const checkScreenSize = () => {
+            const isMobileSize = window.innerWidth < 768;
+            setIsMobile(isMobileSize);
+            setCardsPerRow(calculateCardsPerRow());
+        };
 
-        return () => window.removeEventListener('resize', checkIsMobile);
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
     // Scroll-based detection for floating button
@@ -78,9 +116,10 @@ const AchievementSection: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Reset showAllMobile when category changes
+    // Reset show states when category changes
     useEffect(() => {
         setShowAllMobile(false);
+        setShowAllDesktop(false);
     }, [selectedCategory]);
 
     // Get unique categories for filtering
@@ -102,15 +141,22 @@ const AchievementSection: React.FC = () => {
             .slice(0, 3);
     }, [filteredAchievements]);
 
+    // Get achievements for desktop 2-row limit (dynamic based on screen size)
+    const twoRowDesktopAchievements = useMemo(() => {
+        const maxCardsForTwoRows = cardsPerRow * 2;
+        return filteredAchievements.slice(0, maxCardsForTwoRows);
+    }, [filteredAchievements, cardsPerRow]);
+
     // Get achievements to display based on screen size and show state
     const achievementsToDisplay = useMemo(() => {
-        // On mobile, show only high priority by default, all when expanded
         if (isMobile) {
+            // On mobile, show only high priority by default, all when expanded
             return showAllMobile ? filteredAchievements : highPriorityAchievements;
+        } else {
+            // On desktop, show 2 rows by default (dynamic based on screen), all when expanded
+            return showAllDesktop ? filteredAchievements : twoRowDesktopAchievements;
         }
-        // On desktop, always show all
-        return filteredAchievements;
-    }, [filteredAchievements, highPriorityAchievements, showAllMobile, isMobile]);
+    }, [filteredAchievements, highPriorityAchievements, twoRowDesktopAchievements, showAllMobile, showAllDesktop, isMobile]);
 
     // Get category icon
     const getCategoryIcon = (category: Achievement['category']) => {
@@ -136,12 +182,20 @@ const AchievementSection: React.FC = () => {
 
     // Handle show more 
     const handleShowMore = () => {
-        setShowAllMobile(true);
+        if (isMobile) {
+            setShowAllMobile(true);
+        } else {
+            setShowAllDesktop(true);
+        }
     };
 
     // Handle show less
     const handleShowLess = () => {
-        setShowAllMobile(false);
+        if (isMobile) {
+            setShowAllMobile(false);
+        } else {
+            setShowAllDesktop(false);
+        }
     };
 
     return (
@@ -150,7 +204,7 @@ const AchievementSection: React.FC = () => {
                 {/* 📋 Section Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
-                        🏆 Achievements & Certifications
+                      Achievements & Certifications
                     </h2>
                     <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mb-6"></div>
                     <p className="text-lg text-muted max-w-3xl mx-auto leading-relaxed">
@@ -323,50 +377,53 @@ const AchievementSection: React.FC = () => {
                     </AnimatePresence>
                 </div>
 
-                {/* � Mobile Show More/Less Button */}
-                {isMobile && !showAllMobile && filteredAchievements.length > 3 && (
-                    <div className="flex justify-center mt-8">
-                        <motion.button
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleShowMore}
-                            className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium transition-all duration-300"
-                            style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
-                        >
-                            <span>Show {filteredAchievements.length - achievementsToDisplay.length} More</span>
-                            <FiTrendingUp size={16} />
-                        </motion.button>
-                    </div>
-                )}
-
-                {/* Floating Show Less Button - Visible when expanded and not scrolled far away */}
-                <AnimatePresence>
-                    {isMobile && showAllMobile && showFloatingButton && filteredAchievements.length > 3 && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            className="fixed bottom-20 right-4 z-50"
-                        >
+                {/* 📱 Show More Button - Mobile & Desktop with Dynamic 2-Row Limit */}
+                {((isMobile && !showAllMobile && filteredAchievements.length > 3) ||
+                    (!isMobile && !showAllDesktop && filteredAchievements.length > cardsPerRow * 2)) && (
+                        <div className="flex justify-center mt-8">
                             <motion.button
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={handleShowLess}
-                                className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium shadow-xl bg-white dark:bg-gray-900 transition-all duration-300"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={handleShowMore}
+                                className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium transition-all duration-300"
                                 style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
                             >
-                                <span>Show Less</span>
-                                <motion.div
-                                    animate={{ rotate: 180 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    <FiTrendingUp size={16} />
-                                </motion.div>
+                                <span>Show {filteredAchievements.length - achievementsToDisplay.length} More</span>
+                                <FiTrendingUp size={16} />
                             </motion.button>
-                        </motion.div>
+                        </div>
                     )}
+
+                {/* Floating Show Less Button - Mobile & Desktop */}
+                <AnimatePresence>
+                    {((isMobile && showAllMobile && filteredAchievements.length > 3) ||
+                        (!isMobile && showAllDesktop && filteredAchievements.length > cardsPerRow * 2)) &&
+                        showFloatingButton && (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                className="fixed bottom-20 right-4 z-50"
+                            >
+                                <motion.button
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    onClick={handleShowLess}
+                                    className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium shadow-xl bg-white dark:bg-gray-900 transition-all duration-300"
+                                    style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
+                                >
+                                    <span>Show Less</span>
+                                    <motion.div
+                                        animate={{ rotate: 180 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <FiTrendingUp size={16} />
+                                    </motion.div>
+                                </motion.button>
+                            </motion.div>
+                        )}
                 </AnimatePresence>
 
                 {/* �📊 Empty State */}
