@@ -6,6 +6,7 @@ import LeftSidebar from "./_components/LeftSidebar";
 import Footer from "./_components/Footer";
 import HeroSection from "./_components/HeroSection";
 import ExperienceSection from "./_components/ExperienceSection";
+import ProjectsSection from "./_components/ProjectsSection";
 import { ErrorBoundary } from './_components/ErrorBoundary';
 import { NoSSR } from './_components/NoSSR';
 
@@ -27,8 +28,10 @@ export const Home: React.FC = () => {
   return (
     <ErrorBoundary>
       {/* Navigation Components */}
-      <LeftSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <RightVerticalNav />
+      <NoSSR>
+        <LeftSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+        <RightVerticalNav />
+      </NoSSR>
 
       {/* Main Content with Dynamic Margins */}
       <main
@@ -47,11 +50,13 @@ export const Home: React.FC = () => {
         {/* Work Experience Section */}
         <ExperienceSection />
 
+        {/* Projects Section */}
+        <ProjectsSection />
+
         {/* Future Sections will go here */}
         {/* 
         <AboutSection />
         <SkillsSection />
-        <ProjectsSection />
         <ContactSection />
         */}
       </main>
