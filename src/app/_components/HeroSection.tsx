@@ -23,6 +23,7 @@ export const HeroSection: React.FC = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [currentNameStyle, setCurrentNameStyle] = useState<'devanagari' | 'latin'>('devanagari');
     const [typingText, setTypingText] = useState('');
+    const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
     // Name variations for alternating animation
     const nameVariations = {
@@ -57,6 +58,17 @@ export const HeroSection: React.FC = () => {
         setIsLoaded(true);
     }, []);
 
+    // Hide scroll indicator when user scrolls
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            setShowScrollIndicator(scrollY < 50); // Hide when scrolled more than 50px
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const { hero } = personalInfo;
 
     return (
@@ -84,7 +96,7 @@ export const HeroSection: React.FC = () => {
                             {/* Large Animated Name - STANDARD SIZE - Make it bold */}
                             <div className={`transform transition-all duration-1000 delay-300 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                                 }`}>
-                                <h1 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4 hero-text-glow min-h-[60px] sm:min-h-[80px] lg:min-h-[100px] xl:min-h-[120px] flex items-center justify-center lg:justify-start font-kalam
+                                <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-2 hero-text-glow min-h-[50px] sm:min-h-[65px] lg:min-h-[80px] flex items-center justify-center lg:justify-start font-kalam
                                     }`}>
                                     <span className="typing-cursor">
                                         {typingText}
@@ -96,23 +108,23 @@ export const HeroSection: React.FC = () => {
                             {/* Professional Subtitle - STANDARD SIZE */}
                             <div className={`transform transition-all duration-1000 delay-500 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                                 }`}>
-                                <div className="text-lg sm:text-xl lg:text-2xl font-light mb-4">
+                                <div className="text-lg sm:text-xl lg:text-2xl font-light mb-2">
                                     <span className="hero-text-primary">{hero.subtitle}</span>
                                 </div>
 
                                 {/* Description below subtitle - SMALL SIZE with lower opacity */}
-                                <p className="text-sm sm:text-base lg:text-lg hero-text-secondary font-light opacity-70 mt-2 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                                <p className="text-sm sm:text-base lg:text-lg hero-text-secondary font-light opacity-70 mt-1 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                                     {hero.description}
                                 </p>
                             </div>
 
                             {/* CTA Buttons */}
-                            <div className={`flex flex-col sm:flex-row gap-4 pt-4 items-center justify-center lg:justify-start transform transition-all duration-1000 delay-700 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                            <div className={`flex flex-col sm:flex-row gap-3 pt-3 items-center justify-center lg:justify-start transform transition-all duration-1000 delay-700 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                                 }`}>
-                                {/* Hire Me Button - Green */}
+                                {/* Hire Me Button - Green - More compact */}
                                 <a
                                     href={personalInfo.socialLinks.email}
-                                    className="inline-flex items-center justify-center px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl text-base"
+                                    className="inline-flex items-center justify-center px-5 py-2.5 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl text-sm sm:text-base"
                                 >
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -120,12 +132,12 @@ export const HeroSection: React.FC = () => {
                                     Hire Me
                                 </a>
 
-                                {/* View Resume Button - Removed slow transition */}
+                                {/* View Resume Button - More compact */}
                                 <a
                                     href={personalInfo.resumeUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center px-6 py-3 border-2 hero-border hero-accent hover:bg-indigo-600 dark:hover:bg-purple-300 hover:text-white dark:hover:text-purple-900 font-medium rounded-lg transition-all duration-150 text-base"
+                                    className="inline-flex items-center justify-center px-5 py-2.5 border-2 hero-border hero-accent hover:bg-indigo-600 dark:hover:bg-purple-300 hover:text-white dark:hover:text-purple-900 font-medium rounded-lg transition-all duration-150 text-sm sm:text-base"
                                 >
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -149,11 +161,11 @@ export const HeroSection: React.FC = () => {
                         <div className={`flex justify-center lg:justify-end order-1 lg:order-2 transform transition-all duration-1000 delay-200 ease-out ${isLoaded ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-12 opacity-0 scale-95'
                             }`}>
                             <div className="relative flex justify-center">
-                                {/* Profile Picture Container */}
-                                <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 xl:w-[420px] xl:h-[420px] 2xl:w-[500px] 2xl:h-[500px]">
+                                {/* Profile Picture Container - Reduced sizes for compactness */}
+                                <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
 
                                     {/* Circular Text Outside Profile Picture - Single Line */}
-                                    <div className="absolute inset-0 pointer-events-none z-10" style={{ transform: 'scale(1.3)' }}>
+                                    <div className="absolute inset-0 pointer-events-none z-10" style={{ transform: 'scale(1.25)' }}>
                                         <svg className="w-full h-full" viewBox="0 0 400 400">
                                             <defs>
                                                 {/* Single circle for catchphrase */}
@@ -198,11 +210,11 @@ export const HeroSection: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Scroll Down Indicator */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+                {/* Scroll Down Indicator - More compact positioning with scroll-based visibility */}
+                <div className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 transition-opacity duration-500 ${showScrollIndicator ? 'opacity-100' : 'opacity-0'}`}>
                     <div className="flex flex-col items-center hero-text-secondary animate-bounce">
-                        <span className="text-sm font-light mb-2">Scroll Down</span>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <span className="text-xs font-light mb-1">Scroll Down</span>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                         </svg>
                     </div>

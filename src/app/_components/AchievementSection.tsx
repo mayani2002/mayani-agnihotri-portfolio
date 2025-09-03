@@ -57,24 +57,24 @@ const AchievementSection: React.FC = () => {
     useEffect(() => {
         const handleScroll = () => {
             if (!sectionRef.current) return;
-            
+
             const sectionRect = sectionRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-            
+
             // Show button only when section is actually visible in viewport
             // More restrictive: section must be at least partially visible
             const isSectionVisible = sectionRect.bottom > 0 && sectionRect.top < windowHeight;
-            
+
             // Additional check: ensure user hasn't scrolled too far past the section
             const isNotTooFarPast = sectionRect.bottom > -200; // Allow some buffer when scrolled past
-            
+
             setShowFloatingButton(isSectionVisible || (sectionRect.top < 0 && isNotTooFarPast));
         };
 
         window.addEventListener('scroll', handleScroll);
         // Check initial state
         handleScroll();
-        
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
