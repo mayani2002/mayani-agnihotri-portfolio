@@ -7,6 +7,7 @@ import Footer from "./_components/Footer";
 import HeroSection from "./_components/HeroSection";
 import ExperienceSection from "./_components/ExperienceSection";
 import ProjectsSection from "./_components/ProjectsSection";
+import AchievementSection from "./_components/AchievementSection";
 import { ErrorBoundary } from './_components/ErrorBoundary';
 import { NoSSR } from './_components/NoSSR';
 
@@ -52,6 +53,9 @@ export const Home: React.FC = () => {
 
         {/* Projects Section */}
         <ProjectsSection />
+
+        {/* Achievements Section */}
+        <AchievementSection />
 
         {/* Future Sections will go here */}
         {/* 

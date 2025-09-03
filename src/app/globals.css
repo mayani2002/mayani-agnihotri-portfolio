@@ -865,3 +865,131 @@ html {
   -webkit-line-clamp: 3;
 }
 
+/* Flexible Grid System - Auto-fitting cards based on available space */
+.cards-grid-flexible {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .cards-grid-flexible {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* Tablet optimization */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .cards-grid-flexible {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Desktop optimization */
+@media (min-width: 1025px) {
+  .cards-grid-flexible {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Large desktop optimization */
+@media (min-width: 1400px) {
+  .cards-grid-flexible {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Project cards flexible grid */
+.projects-grid-flexible {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Mobile project grid */
+@media (max-width: 640px) {
+  .projects-grid-flexible {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Tablet project grid */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .projects-grid-flexible {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Desktop project grid */
+@media (min-width: 1025px) {
+  .projects-grid-flexible {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Large desktop project grid */
+@media (min-width: 1400px) {
+  .projects-grid-flexible {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Responsive Card Width Utilities for Neat Layout */
+.card-width-responsive {
+  width: 100%;
+  min-width: 280px;
+  max-width: 380px;
+}
+
+/* Project Card Width - Constrained for better layout */
+.project-card-width {
+  width: 100%;
+  min-width: 300px;
+  max-width: 450px;
+}
+
+/* Container that adapts to sidebar state */
+.adaptive-container {
+  width: 100%;
+  max-width: min(95vw, 1400px);
+  margin: 0 auto;
+  padding: 0 1rem;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .adaptive-container {
+    max-width: min(90vw, 1400px);
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .adaptive-container {
+    max-width: min(85vw, 1600px);
+    padding: 0 2rem;
+  }
+}
+
+/* When sidebar is open, adjust container */
+@media (min-width: 1024px) {
+  .sidebar-open .adaptive-container {
+    max-width: min(75vw, 1400px);
+  }
+}
+
+/* Simplified Grid Container - Replaced by adaptive-container */
+

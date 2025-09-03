@@ -2,12 +2,13 @@ export interface Achievement {
     id: string;
     title: string;
     description: string;
-    category: 'Award' | 'Certification' | 'Recognition' | 'Milestone' | 'Hackathon' | 'Publication';
+    category: 'Award' | 'Certification' | 'Milestone' | 'Hackathon' | 'Publication';
     date: string;
     issuer?: string;
     credentialUrl?: string;
     icon?: string;
     image?: string;
+    images?: string[]; // Multiple images for hackathons and detailed views
     importance: 'High' | 'Medium' | 'Low';
     skills?: string[]; // Related skills
     metrics?: {
@@ -25,6 +26,13 @@ export const achievements: Achievement[] = [
         category: "Hackathon",
         date: "2023-07",
         issuer: "TechCorp Innovation Hub",
+        image: "/placeholder-project.svg",
+        images: [
+            "/placeholder-project.svg",
+            "/placeholder-project.svg",
+            "/placeholder-project.svg",
+            "/placeholder-project.svg"
+        ],
         importance: "High",
         skills: ["React", "Node.js", "AI/ML", "MongoDB"],
         metrics: {
@@ -47,7 +55,7 @@ export const achievements: Achievement[] = [
         id: "achievement-3",
         title: "Open Source Contributor",
         description: "Made significant contributions to popular open-source projects, with over 100+ commits accepted and merged. Active in the developer community.",
-        category: "Recognition",
+        category: "Milestone",
         date: "2023-01",
         importance: "Medium",
         skills: ["Git", "Open Source", "Community"],
@@ -104,7 +112,7 @@ export const achievements: Achievement[] = [
         id: "achievement-8",
         title: "Client Satisfaction - 5 Star Rating",
         description: "Maintained a perfect 5-star rating across all freelance platforms with 100% client satisfaction rate over 20+ completed projects.",
-        category: "Recognition",
+        category: "Award",
         date: "2023-09",
         importance: "High",
         skills: ["Client Management", "Communication", "Project Delivery"],
