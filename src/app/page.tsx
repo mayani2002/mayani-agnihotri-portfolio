@@ -7,6 +7,7 @@ import Footer from "./_components/Footer";
 import HeroSection from "./_components/HeroSection";
 import ExperienceSection from "./_components/ExperienceSection";
 import { ErrorBoundary } from './_components/ErrorBoundary';
+import { NoSSR } from './_components/NoSSR';
 
 export const Home: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -38,6 +39,7 @@ export const Home: React.FC = () => {
           ${isDesktop && isSidebarOpen ? 'md:ml-64 max-w-5xl' : 'max-w-6xl'}
           md:mr-24 lg:mr-20
         `}
+        suppressHydrationWarning
       >
         {/* Hero Section - Full Screen */}
         <HeroSection />

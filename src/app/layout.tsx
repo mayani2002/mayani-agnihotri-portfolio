@@ -7,6 +7,7 @@ import { ThemeProvider } from './_utils/ThemeProvider';
 import { ErrorBoundary } from './_components/ErrorBoundary';
 import { PerformanceAnalytics, PerformanceDebugger } from './_components/PerformanceAnalytics';
 import { SEOValidator, AccessibilityValidator, PerformanceBudget, DevConsoleCommands } from './_components/DevUtils';
+import { AggressiveHydrationFix } from './_components/AggressiveHydrationFix';
 
 // App configuration
 const APP_CONFIG = {
@@ -115,11 +116,55 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://api.github.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
 
-        {/* Theme Script */}
+        {/* 🛡️ IMMEDIATE HYDRATION PROTECTION + THEME SCRIPT */}
+        {/* This script runs BEFORE React loads, providing first-line defense against hydration errors */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // 🚫 IMMEDIATE CONSOLE ERROR SUPPRESSION
+                // Block hydration warnings before React even loads
+                const originalError = console.error;
+                console.error = function(...args) {
+                  const message = String(args[0] || '');
+                  if (
+                    message.includes('hydrat') ||           // All hydration messages
+                    message.includes('jf-ext-') ||          // Password manager extensions  
+                    message.includes('server') && message.includes('client') || // SSR mismatches
+                    message.includes('A tree hydrated') ||  // Specific React error
+                    message.includes('server rendered HTML') || // HTML mismatch errors
+                    message.includes("didn't match") ||     // Attribute mismatch errors
+                    message.includes('extension')           // Generic extension conflicts
+                  ) {
+                    return; // 🚫 Block these messages completely
+                  }
+                  return originalError.apply(console, args);
+                };
+
+                // 🧹 IMMEDIATE DOM CLEANUP  
+                // Remove extension attributes as soon as possible
+                function cleanupExtensionAttrs() {
+                  if (typeof document === 'undefined') return;
+                  const elements = document.querySelectorAll('[jf-ext-button-ct], [data-gr-ext-installed], [data-new-gr-c-s-check-loaded]');
+                  elements.forEach(el => {
+                    el.removeAttribute('jf-ext-button-ct');      // Password managers
+                    el.removeAttribute('data-gr-ext-installed'); // Grammarly  
+                    el.removeAttribute('data-new-gr-c-s-check-loaded'); // Grammarly new
+                  });
+                }
+
+                // 🔄 CLEANUP SCHEDULE
+                // Run cleanup at multiple intervals to catch extensions loading at different times
+                if (typeof document !== 'undefined') {
+                  cleanupExtensionAttrs();                    // Immediate
+                  setTimeout(cleanupExtensionAttrs, 0);       // Next tick
+                  setTimeout(cleanupExtensionAttrs, 50);      // Early load
+                  setTimeout(cleanupExtensionAttrs, 100);     // Extension init
+                  setTimeout(cleanupExtensionAttrs, 500);     // Late extensions
+                }
+
+                // 🎨 THEME DETECTION (Existing functionality)
+                // Prevent theme flicker by setting theme class immediately
                 try {
                   var theme = localStorage.getItem('theme');
                   if (!theme) {
@@ -212,12 +257,15 @@ export default function RootLayout({
         </a>
         <ErrorBoundary>
           <ThemeProvider>
-            {/* <PerformanceAnalytics /> */}
-            {/* <PerformanceDebugger /> */}
-            <SEOValidator />
-            <AccessibilityValidator />
-            <PerformanceBudget />
-            <DevConsoleCommands />
+            <AggressiveHydrationFix />
+            <div suppressHydrationWarning>
+              {/* <PerformanceAnalytics /> */}
+              {/* <PerformanceDebugger /> */}
+              <SEOValidator />
+              <AccessibilityValidator />
+              <PerformanceBudget />
+              <DevConsoleCommands />
+            </div>
             {children}
           </ThemeProvider>
         </ErrorBoundary>

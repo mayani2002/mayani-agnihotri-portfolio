@@ -58,7 +58,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     // No need to hide children since theme is set in head script
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            {children}
+            <div suppressHydrationWarning>
+                {children}
+            </div>
         </ThemeContext.Provider>
     );
 }
