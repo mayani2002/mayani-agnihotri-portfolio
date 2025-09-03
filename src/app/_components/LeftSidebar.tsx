@@ -53,7 +53,7 @@ export default function LeftSidebar({ isOpen: externalIsOpen, setIsOpen: externa
             <aside
                 className={`
           fixed top-0 left-0 h-screen sidebar-surface
-          rounded-r-3xl shadow-large flex flex-col py-3 px-5 z-50
+          rounded-r-3xl border-r-2 border-dashed border-gray-300 dark:border-gray-600 flex flex-col py-3 px-5 z-50
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           

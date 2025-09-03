@@ -41,7 +41,7 @@ html {
 
   /* UI Component Colors - Using Portfolio Brand Colors */
   --color-surface: var(--tw-light, #FFFFFF) var(--tw-dark, #1b0933ff);
-  --color-surface-elevated: var(--tw-light, #F8F9FA) var(--tw-dark, #1A0B2E);
+  --color-surface-elevated: var(--tw-light, #F8F9FA) var(--tw-dark, #0F0A1C);
   --color-border: var(--tw-light, #E5E7EB) var(--tw-dark, #693B93);
   --color-border-hover: var(--tw-light, #60CAD9) var(--tw-dark, #A855F7);
   
