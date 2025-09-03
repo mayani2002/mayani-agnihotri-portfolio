@@ -20,15 +20,14 @@ import { OptimizedImage } from './OptimizedImage';
  * Design features enhanced typography, smooth animations, and consistent theming
  */
 export const HeroSection: React.FC = () => {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [currentNameStyle, setCurrentNameStyle] = useState<'devanagari' | 'latin'>('devanagari');
+    const [currentNameStyle, setCurrentNameStyle] = useState<'latin' | 'devanagari'>('latin');
     const [typingText, setTypingText] = useState('');
     const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
     // Name variations for alternating animation
-    const nameVariations = {
+    const nameVariations = {        latin: "Mayani Agnihotri",
         devanagari: "मयनी अग्निहोत्री", // Mayani Agnihotri in Devanagari
-        latin: "Mayani Agnihotri"
+
     };
 
     // Typing animation for name
@@ -46,17 +45,12 @@ export const HeroSection: React.FC = () => {
                     // Switch to other style and restart typing after longer delay
                     setCurrentNameStyle(prev => prev === 'devanagari' ? 'latin' : 'devanagari');
                     setTypingText('');
-                }, 5000); // Wait 5 seconds before switching (increased from 2s)
+                }, 4000); // Wait 5 seconds before switching (increased from 2s)
             }
         }, 80); // Faster typing speed (reduced from 100ms to 80ms)
 
         return () => clearInterval(typeInterval);
     }, [currentNameStyle]);
-
-    // Trigger animations on mount
-    useEffect(() => {
-        setIsLoaded(true);
-    }, []);
 
     // Hide scroll indicator when user scrolls
     useEffect(() => {
@@ -86,16 +80,14 @@ export const HeroSection: React.FC = () => {
                         <div className="hero-text-primary space-y-2 lg:space-y-3 text-center lg:text-left order-2 lg:order-1">
 
                             {/* Greeting with Animation - SMALL SIZE */}
-                            <div className={`transform transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                                }`}>
+                            <div>
                                 <p className="text-sm sm:text-base lg:text-lg font-light mb-0 hero-text-secondary">
                                     {hero.greeting}
                                 </p>
                             </div>
 
                             {/* Large Animated Name - STANDARD SIZE - Make it bold */}
-                            <div className={`transform transition-all duration-1000 delay-300 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                                }`}>
+                            <div>
                                 <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-2 hero-text-glow min-h-[50px] sm:min-h-[65px] lg:min-h-[80px] flex items-center justify-center lg:justify-start font-kalam
                                     }`}>
                                     <span className="typing-cursor">
@@ -106,8 +98,7 @@ export const HeroSection: React.FC = () => {
                             </div>
 
                             {/* Professional Subtitle - STANDARD SIZE */}
-                            <div className={`transform transition-all duration-1000 delay-500 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                                }`}>
+                            <div>
                                 <div className="text-lg sm:text-xl lg:text-2xl font-light mb-2">
                                     <span className="hero-text-primary">{hero.subtitle}</span>
                                 </div>
@@ -119,8 +110,7 @@ export const HeroSection: React.FC = () => {
                             </div>
 
                             {/* CTA Buttons */}
-                            <div className={`flex flex-col sm:flex-row gap-3 pt-3 items-center justify-center lg:justify-start transform transition-all duration-1000 delay-700 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                                }`}>
+                            <div className="flex flex-col sm:flex-row gap-3 pt-3 items-center justify-center lg:justify-start">
                                 {/* Hire Me Button - Green - More compact */}
                                 <a
                                     href={personalInfo.socialLinks.email}
@@ -147,8 +137,7 @@ export const HeroSection: React.FC = () => {
                             </div>
 
                             {/* Immediate Joiner Message */}
-                            <div className={`transform transition-all duration-1000 delay-900 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                                }`}>
+                            <div>
                                 <div className="text-xs sm:text-sm lg:text-base hero-text-secondary font-medium">
                                     <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded-full border border-green-300 dark:border-green-700">
                                         💼 Immediate Joiner Available
@@ -158,8 +147,7 @@ export const HeroSection: React.FC = () => {
                         </div>
 
                         {/* Right Side - Profile Picture with Circular Text */}
-                        <div className={`flex justify-center lg:justify-end order-1 lg:order-2 transform transition-all duration-1000 delay-200 ease-out ${isLoaded ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-12 opacity-0 scale-95'
-                            }`}>
+                        <div className="flex justify-center lg:justify-end order-1 lg:order-2">
                             <div className="relative flex justify-center">
                                 {/* Profile Picture Container - Reduced sizes for compactness */}
                                 <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">

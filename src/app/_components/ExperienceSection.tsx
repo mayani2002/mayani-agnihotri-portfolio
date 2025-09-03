@@ -1,16 +1,15 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { workExperience } from '@/data/experience';
 import { OptimizedImage } from './OptimizedImage';
 
 interface ExperienceCardProps {
     experience: typeof workExperience[0];
     index: number;
-    isVisible: boolean;
 }
 
-const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index, isVisible }) => {
+const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) => {
     const formatDate = (dateString: string) => {
         if (dateString === 'Present') return 'Present';
         const date = new Date(dateString);
@@ -64,7 +63,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index, isVi
                 <img
                     src={imgSrc}
                     alt={`${experience.company} logo`}
-                    className="w-full h-full object-cover rounded-lg transition-transform duration-200 hover:scale-105"
+                    className="w-full h-full object-cover rounded-lg"
                     onError={handleImageError}
                     loading="lazy"
                 />
@@ -74,9 +73,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index, isVi
 
     return (
         <div
-            className={`${index < workExperience.length - 1 ? 'mb-8' : 'mb-0'} flex w-full transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                }`}
-            style={{ transitionDelay: `${index * 200}ms` }}
+            className={`${index < workExperience.length - 1 ? 'mb-8' : 'mb-0'} flex w-full`}
         >
             {/* Desktop Timeline Layout */}
             <div className="hidden lg:flex w-full flex-row">
@@ -235,42 +232,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index, isVi
 };
 
 const ExperienceSection: React.FC = () => {
-    const [visibleCards, setVisibleCards] = useState<boolean[]>([]);
     const sectionRef = useRef<HTMLElement>(null);
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = cardRefs.current.findIndex(ref => ref === entry.target);
-                        if (index !== -1) {
-                            setVisibleCards(prev => {
-                                const newVisible = [...prev];
-                                newVisible[index] = true;
-                                return newVisible;
-                            });
-                        }
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -10% 0px'
-            }
-        );
-
-        cardRefs.current.forEach(ref => {
-            if (ref) observer.observe(ref);
-        });
-
-        return () => observer.disconnect();
-    }, []);
-
-    useEffect(() => {
-        setVisibleCards(new Array(workExperience.length).fill(false));
-    }, []);
 
     return (
         <section
@@ -294,16 +256,10 @@ const ExperienceSection: React.FC = () => {
                 <div className="relative px-2 sm:pl-2 sm:pr-0">
                     {/* Experience Cards */}
                     {workExperience.map((experience, index) => (
-                        <div
-                            key={experience.id}
-                            ref={el => {
-                                cardRefs.current[index] = el;
-                            }}
-                        >
+                        <div key={experience.id}>
                             <ExperienceCard
                                 experience={experience}
                                 index={index}
-                                isVisible={visibleCards[index]}
                             />
                         </div>
                     ))}
@@ -320,7 +276,7 @@ const ExperienceSection: React.FC = () => {
                         </p>
                         <a
                             href="#contact"
-                            className="inline-block bg-white text-brand-primary px-8 py-3 rounded-full font-semibold hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                            className="inline-block bg-white text-brand-primary px-8 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors duration-200"
                         >
                             Get In Touch
                         </a>
