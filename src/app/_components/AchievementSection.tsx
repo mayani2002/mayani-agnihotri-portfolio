@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
     FiAward,
     FiStar,
@@ -42,6 +42,7 @@ const AchievementSection: React.FC = () => {
     const [showFloatingButton, setShowFloatingButton] = useState<boolean>(true);
     const [cardsPerRow, setCardsPerRow] = useState<number>(4); // Default estimate
     const sectionRef = useRef<HTMLElement>(null);
+    const isVisible = useInView(sectionRef, { once: true, amount: 0.2 });
 
     // Check screen size and calculate cards per row dynamically
     useEffect(() => {
@@ -206,7 +207,13 @@ const AchievementSection: React.FC = () => {
                     <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
                       Achievements & Certifications
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mb-6"></div>
+
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={isVisible ? { scaleX: 1 } : {}}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"
+                    ></motion.div>
                     <p className="text-lg text-muted max-w-3xl mx-auto leading-relaxed">
                         A showcase of certifications, awards, milestones, and hackathon wins earned throughout my
                         journey as a software engineer and developer.

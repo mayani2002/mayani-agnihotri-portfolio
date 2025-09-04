@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { workExperience } from '@/data/experience';
 import { OptimizedImage } from './OptimizedImage';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 interface ExperienceCardProps {
     experience: typeof workExperience[0];
@@ -10,6 +11,7 @@ interface ExperienceCardProps {
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) => {
+    
     const formatDate = (dateString: string) => {
         if (dateString === 'Present') return 'Present';
         const date = new Date(dateString);
@@ -233,6 +235,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) =>
 
 const ExperienceSection: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
+    const isVisible = useInView(sectionRef, { once: true, amount: 0.2 });
 
     return (
         <section
@@ -246,8 +249,13 @@ const ExperienceSection: React.FC = () => {
                     <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
                         Work Experience
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-brand mx-auto mb-6"></div>
-                    <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
+
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={isVisible ? { scaleX: 1 } : {}}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"
+                    ></motion.div>                    <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
                         My professional journey building scalable applications and delivering impactful solutions
                     </p>
                 </div>

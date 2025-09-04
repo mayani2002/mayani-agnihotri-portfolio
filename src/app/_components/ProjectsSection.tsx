@@ -6,6 +6,8 @@ import { projects, Project } from '@/data/projects';
 import { OptimizedImage } from './OptimizedImage';
 import ProjectModal from './ProjectModal';
 import { NoSSR } from './NoSSR';
+import { motion, useInView } from 'framer-motion';
+
 
 const ProjectsSection: React.FC = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>('All');
@@ -17,6 +19,7 @@ const ProjectsSection: React.FC = () => {
     const [isInViewport, setIsInViewport] = useState<boolean>(false);
     const [cardsPerRow, setCardsPerRow] = useState<number>(2); // Default estimate for projects
     const sectionRef = useRef<HTMLElement>(null);
+    const isVisible = useInView(sectionRef, { once: true, amount: 0.2 });
 
     // Check screen size and calculate cards per row dynamically for projects
     useEffect(() => {
@@ -175,8 +178,12 @@ const ProjectsSection: React.FC = () => {
                     <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
                         Featured Projects
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-brand mx-auto mb-6"></div>
-                    <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={isVisible ? { scaleX: 1 } : {}}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"
+                    ></motion.div>                    <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
                         A showcase of my recent work, featuring full-stack applications,
                         tools, and experiments with modern technologies.
                     </p>
