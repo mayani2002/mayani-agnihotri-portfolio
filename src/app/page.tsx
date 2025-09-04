@@ -15,6 +15,8 @@ import { NoSSR } from './_components/NoSSR';
 export const Home: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false);
+  const [sidebarAutoOpened, setSidebarAutoOpened] = useState(false);
 
   useEffect(() => {
     const checkIsDesktop = () => {
@@ -26,6 +28,30 @@ export const Home: React.FC = () => {
 
     return () => window.removeEventListener('resize', checkIsDesktop);
   }, []);
+
+  // Auto-open sidebar when scrolling past hero section
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.querySelector('#hero') as HTMLElement;
+      if (heroSection) {
+        const heroHeight = heroSection.offsetHeight;
+        const scrollPosition = window.scrollY;
+        const pastHero = scrollPosition > heroHeight * 0.6; // Trigger when 60% past hero
+        
+        if (pastHero && !hasScrolledPastHero && isDesktop) {
+          setHasScrolledPastHero(true);
+          setSidebarAutoOpened(true);
+          // Add a small delay to make it feel more natural
+          setTimeout(() => {
+            setIsSidebarOpen(true);
+          }, 200);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrolledPastHero, isDesktop]);
 
   return (
     <ErrorBoundary>
