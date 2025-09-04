@@ -17,9 +17,9 @@ const navLinks = [
     { href: '#experience', icon: <FaBriefcase size={18} />, label: 'Work', color: 'text-sky-600 dark:text-sky-400' },
     { href: '#projects', icon: <FaFileCode size={18} />, label: 'Projects', color: 'text-cyan-600 dark:text-cyan-400' },
     { href: '#achievements', icon: <FaTrophy size={18} />, label: 'Success', color: 'text-yellow-500 dark:text-yellow-400' },
+    { href: '#education', icon: <FaGraduationCap size={18} />, label: 'Education', color: 'text-indigo-500 dark:text-indigo-400' },
     // Future sections - uncomment when implemented
     // { href: '#skills', icon: <FaDev size={18} />, label: 'Tech Stack', color: 'text-purple-500 dark:text-purple-400' },
-    // { href: '#education', icon: <FaGraduationCap size={18} />, label: 'Education', color: 'text-indigo-500 dark:text-indigo-400' },
     // { href: '#blog', icon: <FaSquarePen size={18} />, label: 'Blogs', color: 'text-fuchsia-500 dark:text-fuchsia-400' },
     // { href: '#contact', icon: <FaUserPen size={18} />, label: 'Contact', color: 'text-green-500 dark:text-green-400' },
 ];

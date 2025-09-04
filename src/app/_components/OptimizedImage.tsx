@@ -1,7 +1,35 @@
 /**
  * Optimized Image Components
  * 
- * This module provides a comprehensive set of image components built on top of Next.js Image
+ * This module provides a com    const handleError = () => {
+        setImageError(true);
+        if (onError) {
+            onError();
+        }
+    };
+
+    // If there's an error and onError callback is provided, don't render anything
+    // Let the parent component handle the fallback
+    if (imageError && onError) {
+        return null;
+    }
+
+    // If there's an error but no onError callback, show the default error state
+    if (imageError) {
+        return (
+            <div
+                className={`bg-gray-200 dark:bg-gray-700 flex items-center justify-center ${className}`}
+                style={{ width, height }}
+            >
+                <div className="text-gray-400 text-center p-4">
+                    <svg className="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs">Failed to load</span>
+                </div>
+            </div>
+        );
+    }age components built on top of Next.js Image
  * optimization. These components handle loading states, error handling, responsive sizing,
  * and performance optimization automatically.
  * 

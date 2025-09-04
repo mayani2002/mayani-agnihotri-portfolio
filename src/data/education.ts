@@ -64,38 +64,40 @@ export const education: Education[] = [
             description: "Research and implementation of microservices architecture for large-scale web applications, focusing on performance optimization and system reliability.",
             advisor: "Dr. Sarah Johnson"
         },
+        logo: "/logos/university-tech-logo.svg",
         website: "https://university-of-tech.edu"
     },
-    {
-        id: "edu-2",
-        institution: "Central High School",
-        degree: "Higher Secondary Certificate",
-        field: "Science (Physics, Chemistry, Mathematics)",
-        startDate: "2017-04",
-        endDate: "2019-03",
-        grade: "95.2%",
-        location: "India",
-        description: "Specialized in Science stream with focus on Mathematics and Physics. Developed strong analytical and problem-solving skills.",
-        coursework: [
-            "Advanced Mathematics",
-            "Physics",
-            "Chemistry",
-            "Computer Science",
-            "English"
-        ],
-        achievements: [
-            "School Topper in Mathematics",
-            "Regional Science Olympiad Winner",
-            "Perfect attendance award",
-            "Student Council Member"
-        ],
-        activities: [
-            "Science Club - President",
-            "Mathematics Olympiad Participant",
-            "Inter-school Coding Competition - Winner",
-            "Volunteer for Community Tech Workshops"
-        ]
-    },
+    // {
+    //     id: "edu-2",
+    //     institution: "Central High School",
+    //     degree: "Higher Secondary Certificate",
+    //     field: "Science (Physics, Chemistry, Mathematics)",
+    //     startDate: "2017-04",
+    //     endDate: "2019-03",
+    //     grade: "95.2%",
+    //     location: "India",
+    //     description: "Specialized in Science stream with focus on Mathematics and Physics. Developed strong analytical and problem-solving skills.",
+    //     coursework: [
+    //         "Advanced Mathematics",
+    //         "Physics",
+    //         "Chemistry",
+    //         "Computer Science",
+    //         "English"
+    //     ],
+    //     achievements: [
+    //         "School Topper in Mathematics",
+    //         "Regional Science Olympiad Winner",
+    //         "Perfect attendance award",
+    //         "Student Council Member"
+    //     ],
+    //     activities: [
+    //         "Science Club - President",
+    //         "Mathematics Olympiad Participant",
+    //         "Inter-school Coding Competition - Winner",
+    //         "Volunteer for Community Tech Workshops"
+    //     ],
+    //     logo: "/logos/central-high-logo.svg"
+    // },
     {
         id: "edu-3",
         institution: "Online Learning Platforms",
@@ -120,7 +122,8 @@ export const education: Education[] = [
             "Meta React Developer Professional Certificate",
             "Google Cloud Professional Cloud Architect (In Progress)",
             "Multiple Coursera Course Certificates"
-        ]
+        ],
+        logo: "/logos/online-learning-logo.svg"
     }
 ];
 
