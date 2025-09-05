@@ -25,47 +25,51 @@ export interface Education {
 export const education: Education[] = [
     {
         id: "edu-1",
-        institution: "University of Technology",
+        institution: "Thakur College of Engineering and Technology",
         degree: "Bachelor of Technology",
-        field: "Computer Science and Engineering",
-        startDate: "2019-08",
-        endDate: "2023-06",
+        field: "Artificial Intelligence and Machine Learning",
+        startDate: "2020-10",
+        endDate: "2024-06",
         grade: "First Class with Distinction",
-        gpa: 8.5,
+        gpa: 9.3,
         maxGpa: 10.0,
         location: "India",
-        description: "Comprehensive computer science program focusing on software development, algorithms, data structures, and system design. Active participant in coding competitions and technical societies.",
+        description: "Comprehensive computer science and Machine Learning program focusing on core ML, software development, algorithms, data structures, and system design. Active participant in coding competitions and Hackathons.",
         coursework: [
             "Data Structures and Algorithms",
             "Database Management Systems",
             "Software Engineering",
             "Computer Networks",
             "Operating Systems",
+            "Object-Oriented Programming",
             "Web Technologies",
-            "Machine Learning",
-            "Artificial Intelligence",
+            "App Development",
             "System Design",
-            "Cybersecurity"
+            "Software Development Life Cycle (SDLC)",
+            "Business Intelligence",
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Mathematics & Statistics"
+
         ],
         achievements: [
-            "Dean's List for 6 consecutive semesters",
-            "Top 5% of graduating class",
-            "Best Project Award for Final Year Project",
-            "Scholarship recipient for academic excellence"
+            "1st place at Ideathon for Best Project and Presentation within AIML department",
+            "Lead a 45 member team of Coding Club, organizing workshops and coding events",
+            "Organized and hosted 14+ coding contests with 700+ participants as Chairperson",
+            "Top 10% of graduating class",
         ],
         activities: [
-            "Computer Science Society - Technical Lead",
-            "Coding Club - Member",
-            "Hackathon Organizer",
+            "Coding Club - Chairperson",
+            "Code Chef Campus Chapter - DSA Problem Setter",
             "Peer Tutor for Junior Students"
         ],
-        thesis: {
-            title: "Building Scalable Web Applications with Microservices Architecture",
-            description: "Research and implementation of microservices architecture for large-scale web applications, focusing on performance optimization and system reliability.",
-            advisor: "Dr. Sarah Johnson"
-        },
-        logo: "/logos/university-tech-logo.svg",
-        website: "https://university-of-tech.edu"
+        // thesis: {
+        //     title: "Building Scalable Web Applications with Microservices Architecture",
+        //     description: "Research and implementation of microservices architecture for large-scale web applications, focusing on performance optimization and system reliability.",
+        //     advisor: "Dr. Sarah Johnson"
+        // },
+        logo: "/logos/UG-university-tech-logo.png",
+        website: "https://www.tcetmumbai.in/"
     },
     // {
     //     id: "edu-2",
@@ -102,26 +106,27 @@ export const education: Education[] = [
         id: "edu-3",
         institution: "Online Learning Platforms",
         degree: "Professional Certifications",
-        field: "Web Development & Cloud Computing",
+        field: "Software Development, Cloud Computing",
         startDate: "2022-01",
         endDate: "Present",
         location: "Online",
         description: "Continuous learning through various online platforms to stay updated with latest technologies and industry trends.",
         coursework: [
-            "Advanced React Development",
-            "Node.js and Backend Development",
-            "AWS Cloud Solutions",
-            "DevOps and CI/CD",
-            "TypeScript Mastery",
+            "Database Engineering",
+            "DSA - Leetcode",
+            "AWS Cloud Concepts",
+            "Graph Data Structures",
             "System Design",
-            "MongoDB University",
-            "Google Cloud Platform"
+            "DevOps and CI/CD",
+            "Postman - API Testing & Backend",
+            "Node.js Services Development",
+            "Google Cloud Platform",
+            "Lean Six Sigma"            
         ],
         achievements: [
-            "AWS Certified Developer - Associate",
-            "Meta React Developer Professional Certificate",
-            "Google Cloud Professional Cloud Architect (In Progress)",
-            "Multiple Coursera Course Certificates"
+            "AWS Certified Cloud Practitioner",
+            "AIGPE Certified Lean Six Sigma Green Belt",
+            "Multiple Udemy Course Certificates"
         ],
         logo: "/logos/online-learning-logo.svg"
     }
