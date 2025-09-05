@@ -9,6 +9,7 @@ import ExperienceSection from "./_components/ExperienceSection";
 import ProjectsSection from "./_components/ProjectsSection";
 import AchievementSection from "./_components/AchievementSection";
 import EducationSection from "./_components/EducationSection";
+import CallToAction from './_components/CallToAction';
 import { ErrorBoundary } from './_components/ErrorBoundary';
 import { NoSSR } from './_components/NoSSR';
 
@@ -81,9 +82,9 @@ export const Home: React.FC = () => {
         {/* Projects Section */}
         <ProjectsSection />
 
-        {/* Achievements Section */}
-        
+        {/* Achievements Section */}        
         <AchievementSection />
+
         {/* Education Section */}
         <EducationSection />
 
@@ -92,15 +93,15 @@ export const Home: React.FC = () => {
         <AboutSection />
         <SkillsSection />
         <ContactSection />
-        */}
+        */} 
       </main>
-
       {/* Footer */}
       <div className={`
         transition-all duration-300 ease-in-out
         ${isDesktop && isSidebarOpen ? 'md:ml-64' : ''}
         md:mr-24 lg:mr-20
       `}>
+        <CallToAction /> 
         <Footer />
       </div>
     </ErrorBoundary>
