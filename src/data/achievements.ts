@@ -47,9 +47,6 @@ export const achievements: Achievement[] = [
         date: "2023-05",
         issuer: "Amazon Web Services",
         image: "achievements/AWSCertificate.png",
-        images: [
-            "/achievements/AWSCertificate.png",
-        ],
         credentialUrl: "https://www.credly.com/badges/5b67cf79-e07b-4d6b-b93d-76b1c3d04e6f",
         importance: "Medium",
         skills: ["AWS", "Amazon Web Services", "Cloud Computing", "DevOps", "Cloud Fundamentals", "S3", "EC2", "IAM", "RDS", "Lambda"]

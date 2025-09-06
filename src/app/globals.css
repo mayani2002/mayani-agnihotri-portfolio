@@ -867,42 +867,63 @@ html {
 
 /* Flexible Grid System - Auto-fitting cards based on available space */
 .cards-grid-flexible {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
   width: 100%;
-  justify-items: center;
+  margin: 0 auto;
+}
+
+.cards-grid-flexible > * {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 400px;
+  min-width: 280px;
 }
 
 /* Mobile optimization */
 @media (max-width: 640px) {
   .cards-grid-flexible {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
+  }
+  .cards-grid-flexible > * {
+    min-width: 300px;
+    max-width: 100%;
   }
 }
 
 /* Tablet optimization */
 @media (min-width: 641px) and (max-width: 1024px) {
   .cards-grid-flexible {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.25rem;
+  }
+  .cards-grid-flexible > * {
+    min-width: 320px;
+    max-width: 350px;
   }
 }
 
 /* Desktop optimization */
 @media (min-width: 1025px) {
   .cards-grid-flexible {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
+  }
+  .cards-grid-flexible > * {
+    min-width: 300px;
+    max-width: 380px;
   }
 }
 
 /* Large desktop optimization */
 @media (min-width: 1400px) {
   .cards-grid-flexible {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
+  }
+  .cards-grid-flexible > * {
+    min-width: 320px;
+    max-width: 400px;
   }
 }
 

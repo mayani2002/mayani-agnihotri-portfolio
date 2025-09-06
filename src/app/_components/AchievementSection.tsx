@@ -205,7 +205,7 @@ const AchievementSection: React.FC = () => {
                 {/* 📋 Section Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
-                      Achievements & Certifications
+                        Achievements & Certifications
                     </h2>
 
                     <motion.div
@@ -245,7 +245,7 @@ const AchievementSection: React.FC = () => {
                     ))}
                 </div>
 
-                {/* 🎯 Achievements Grid - Flexible Layout */}
+                {/* 🎯 Achievements Grid - Flexible Layout with Centered Cards */}
                 <div className="cards-grid-flexible">
                     <AnimatePresence>
                         {achievementsToDisplay.map((achievement, index) => {
@@ -259,7 +259,7 @@ const AchievementSection: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.3, delay: index * 0.05 }}
-                                    className="group relative exp-card-bg rounded-xl border border-themed transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer overflow-hidden h-96 card-width-responsive"
+                                    className="group relative exp-card-bg rounded-xl border border-themed transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer overflow-hidden h-80 card-width-responsive"
                                     onClick={() => setSelectedAchievement(achievement)}
                                 >
                                     {/* 🏅 Importance Badge */}
@@ -274,7 +274,7 @@ const AchievementSection: React.FC = () => {
                                         </div>
                                     </div>
 
-                                    <div className="relative p-5 h-full flex flex-col">
+                                    <div className="relative p-4 h-full flex flex-col">
                                         {/* 🔝 Header */}
                                         <div className="flex items-start gap-3 mb-3">
                                             <div className="p-2 rounded-lg text-white flex-shrink-0">
@@ -290,22 +290,25 @@ const AchievementSection: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        {/* 🖼️ Thumbnail Image */}
+                                        {/* 🖼️ Thumbnail Image - 3:4 horizontal ratio */}
                                         {achievement.image && (
                                             <div className="mb-3 overflow-hidden rounded-lg border border-themed flex-shrink-0">
                                                 <img
                                                     src={achievement.image}
                                                     alt={achievement.title}
-                                                    className="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    style={{ aspectRatio: '4/3' }}
                                                     loading="lazy"
                                                 />
                                             </div>
                                         )}
 
-                                        {/* 📝 Description */}
-                                        <p className="text-primary text-sm leading-relaxed line-clamp-3 mb-3 flex-1">
-                                            {achievement.description}
-                                        </p>
+                                        {/* 📝 Description - Only show if no image */}
+                                        {!achievement.image && achievement.description && (
+                                            <p className="text-primary text-sm leading-relaxed line-clamp-3 mb-3 flex-1">
+                                                {achievement.description}
+                                            </p>
+                                        )}
 
                                         {/* 📊 Bottom Section - Auto positioned at bottom */}
                                         <div className="space-y-2 mt-auto">

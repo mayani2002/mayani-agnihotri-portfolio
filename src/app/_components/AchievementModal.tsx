@@ -210,18 +210,20 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                         </div>
 
                         <div className="p-6">
-                            {/* 📝 Description */}
-                            <div className="mb-6">
-                                <h3 className="text-xl font-semibold text-primary mb-3 font-kalam flex items-center gap-2">
-                                    <FiBookOpen size={20} />
-                                    About This Achievement
-                                </h3>
-                                <p className="text-primary leading-relaxed text-sm">
-                                    {achievement.description}
-                                </p>
-                            </div>
+                            {/* 📝 Description - Only show if description exists */}
+                            {achievement.description && (
+                                <div className="mb-6">
+                                    <h3 className="text-xl font-semibold text-primary mb-3 font-kalam flex items-center gap-2">
+                                        <FiBookOpen size={20} />
+                                        About This Achievement
+                                    </h3>
+                                    <p className="text-primary leading-relaxed text-sm">
+                                        {achievement.description}
+                                    </p>
+                                </div>
+                            )}
 
-                            {/* �️ Image Gallery */}
+                            {/* �️ Image Gallery - Only show if images exist */}
                             {(achievement.images && achievement.images.length > 0) && (
                                 <div className="mb-6">
                                     <h3 className="text-xl font-semibold text-primary mb-3 font-kalam flex items-center gap-2">
@@ -243,8 +245,8 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                                 </div>
                             )}
 
-                            {/* �📊 Metrics */}
-                            {achievement.metrics && (
+                            {/* �📊 Metrics - Only show if metrics exist */}
+                            {achievement.metrics && (achievement.metrics.ranking || achievement.metrics.participants || achievement.metrics.score) && (
                                 <div className="mb-6">
                                     <h3 className="text-xl font-semibold text-primary mb-3 font-kalam flex items-center gap-2">
                                         <FiTrendingUp size={20} />
