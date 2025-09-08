@@ -89,7 +89,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) =>
 
                 {/* Content Card - Limited Width */}
                 <div className="flex-1 max-w-4xl">
-                    <div className="experience-card rounded-lg transition-all duration-300 p-4 border border-themed exp-card-bg">
+                    <div className=" rounded-lg p-4 border border-themed exp-card-bg">
                         {/* Header Row with Company Info and Dates */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3">
                             {/* Left Column: Company Info */}
@@ -273,23 +273,7 @@ const ExperienceSection: React.FC = () => {
                     ))}
                 </div>
 
-                {/* Call to Action */}
-                <div className="text-center mt-16">
-                    <div className="bg-gradient-brand rounded-2xl p-8 text-white">
-                        <h3 className="text-2xl font-bold mb-4 font-kalam">
-                            Let's Work Together
-                        </h3>
-                        <p className="text-white/80 mb-6 max-w-md mx-auto">
-                            I'm always open to discussing new opportunities and exciting projects.
-                        </p>
-                        <a
-                            href="#contact"
-                            className="inline-block bg-white text-brand-primary px-8 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors duration-200"
-                        >
-                            Get In Touch
-                        </a>
-                    </div>
-                </div>
+             
             </div>
         </section>
     );

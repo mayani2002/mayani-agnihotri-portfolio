@@ -138,7 +138,7 @@ import {
                         {/* Back to Top */}
                         <button
                             onClick={scrollToTop}
-                            className="flex items-center space-x-2 px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full hover:bg-brand-primary hover:text-white transition-all duration-200 group"
+                            className="flex items-center space-x-2 px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full hover:bg-brand-primary transition-all duration-200 group"
                             aria-label="Back to top"
                         >
                             <span>Back to Top</span>

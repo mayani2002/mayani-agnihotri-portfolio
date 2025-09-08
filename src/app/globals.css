@@ -99,6 +99,66 @@ html {
   border-color: var(--color-border-hover);
 }
 
+/* Custom Scrollbar Styles - Thin and Within Frame */
+/* Webkit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px; /* Very thin vertical scrollbar */
+  height: 6px; /* Very thin horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track - within frame */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--tw-light, rgba(96, 202, 217, 0.3)) var(--tw-dark, rgba(105, 59, 147, 0.5));
+  border-radius: 3px;
+  border: none; /* No border to keep it within frame */
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tw-light, rgba(96, 202, 217, 0.6)) var(--tw-dark, rgba(105, 59, 147, 0.8));
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--tw-light, rgba(96, 202, 217, 0.8)) var(--tw-dark, rgba(105, 59, 147, 1));
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tw-light, rgba(96, 202, 217, 0.3)) var(--tw-dark, rgba(105, 59, 147, 0.5)) transparent;
+}
+
+/* Modal-specific scrollbar styles for enhanced visibility */
+.modal-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Slightly wider for modals */
+  height: 8px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: var(--tw-light, rgba(0, 0, 0, 0.05)) var(--tw-dark, rgba(255, 255, 255, 0.05));
+  border-radius: 4px;
+  margin: 4px; /* Margin to keep within frame */
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--tw-light, rgba(96, 202, 217, 0.4)) var(--tw-dark, rgba(105, 59, 147, 0.6));
+  border-radius: 4px;
+  border: 1px solid var(--tw-light, rgba(255, 255, 255, 0.2)) var(--tw-dark, rgba(0, 0, 0, 0.2));
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tw-light, rgba(96, 202, 217, 0.7)) var(--tw-dark, rgba(105, 59, 147, 0.9));
+}
+
+/* Ensure scrollbar doesn't affect content width */
+.scrollbar-stable {
+  scrollbar-gutter: stable;
+}
+
 .text-primary {
   color: var(--color-text-primary);
 }
@@ -332,7 +392,7 @@ html {
 
 /* Gradient backgrounds using portfolio colors */
 .bg-gradient-brand {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+  background: #ffffff;
 }
 
 .dark .bg-gradient-brand {
@@ -695,10 +755,6 @@ html {
   --color-surface-elevated: #F3F4F6;
 }
 
-/* Light mode text colors */
-:root:not(.dark) .text-white {
-  color: #111827 !important;
-}
 
 :root:not(.dark) .text-gray-800 {
   color: #111827 !important;
@@ -793,15 +849,7 @@ html {
   animation: timelinePulse 2s infinite;
 }
 
-/* Hover effects for experience cards */
-.experience-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.experience-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
 .dark .experience-card:hover {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);

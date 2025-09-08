@@ -58,7 +58,7 @@ export default function LeftSidebar({ isOpen: externalIsOpen, setIsOpen: externa
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           
           w-72 md:w-64 
-          overflow-y-auto overflow-x-hidden
+          overflow-y-auto overflow-x-hidden modal-scrollbar scrollbar-stable
           md:rounded-r-lg
         `}
                 aria-label="Sidebar Navigation"
@@ -69,7 +69,7 @@ export default function LeftSidebar({ isOpen: externalIsOpen, setIsOpen: externa
                     <div className="flex-shrink-0 mb-4">
                         {/* Profile Image */}
                         <div className="w-20 h-20 rounded-full mx-auto flex-shrink-0 overflow-hidden border-3 border-primary mb-3 shadow-medium relative">
-                            <img src="/profile-mayani.jpeg" alt="Mayani Agnihotri Profile" className="w-full h-full object-cover" />
+                            <img src="/portfolio-hero.png" alt="Mayani Agnihotri Profile" className="w-full h-full object-cover" />
                             <span className="absolute bottom-0 right-0 w-4 h-4 bg-accent border-2 border-white rounded-full shadow-small"></span>
                         </div>
 
@@ -121,7 +121,7 @@ export default function LeftSidebar({ isOpen: externalIsOpen, setIsOpen: externa
                     </div>
 
                     {/* Info Section - Scrollable with improved scrollbar */}
-                    <div className="flex-1 overflow-y-auto min-h-0 mb-3 sidebar-scroll pr-1">
+                    <div className="flex-1 overflow-y-auto min-h-0 mb-3 sidebar-scroll pr-1 modal-scrollbar scrollbar-stable">
                         <div className="flex flex-col gap-2 text-xs font-medium">
                             {[
                                 ["Age:", "23"],
@@ -147,7 +147,7 @@ export default function LeftSidebar({ isOpen: externalIsOpen, setIsOpen: externa
                         <a
                             href="/Mayani-Agnihotri-Resume.pdf"
                             download="Mayani-Agnihotri-Resume.pdf"
-                            className="bg-green-700 hover:bg-green-800 text-white font-semibold px-4 py-2 rounded-full shadow-medium text-center transition-colors duration-200 dark:bg-green-600 dark:hover:bg-green-700 w-full select-none text-sm block"
+                            className="bg-green-500 hover:bg-green-400 text-white font-semibold px-4 py-2 rounded-full shadow-medium text-center transition-colors duration-200 dark:bg-green-600 dark:hover:bg-green-700 w-full select-none text-sm block"
                         >
                             Download Resume
                         </a>

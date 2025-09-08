@@ -93,11 +93,11 @@ const DefaultErrorFallback: React.FC<{ error?: Error }> = ({ error }) => (
                     <summary className="cursor-pointer font-medium text-red-700 dark:text-red-400">
                         Error Details (Development Mode)
                     </summary>
-                    <pre className="mt-2 text-xs text-red-600 dark:text-red-300 overflow-auto">
+                    <pre className="mt-2 text-xs text-red-600 dark:text-red-300 overflow-auto modal-scrollbar scrollbar-stable max-h-40">
                         {error.message}
                     </pre>
                     {error.stack && (
-                        <pre className="mt-2 text-xs text-red-500 dark:text-red-400 overflow-auto">
+                        <pre className="mt-2 text-xs text-red-500 dark:text-red-400 overflow-auto modal-scrollbar scrollbar-stable max-h-40">
                             {error.stack}
                         </pre>
                     )}
