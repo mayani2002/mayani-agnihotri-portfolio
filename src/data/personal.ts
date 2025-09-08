@@ -63,7 +63,7 @@ export const personalInfo: PersonalInfo = {
         partTime: false,
         remote: true,
     },
-    profileImage: "/profile-mayani.jpeg",
+    profileImage: "/profile.png",
     resumeUrl: "/Mayani-Agnihotri-Resume.pdf",
     // Hero section data based on the design
     hero: {
