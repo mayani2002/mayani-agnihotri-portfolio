@@ -8,6 +8,7 @@ import { ErrorBoundary } from './_components/ErrorBoundary';
 import { PerformanceAnalytics, PerformanceDebugger } from './_components/PerformanceAnalytics';
 import { SEOValidator, AccessibilityValidator, PerformanceBudget, DevConsoleCommands } from './_components/DevUtils';
 import { AggressiveHydrationFix } from './_components/AggressiveHydrationFix';
+import { BinaryBackground } from './_components/BinaryBackground';
 
 // App configuration
 const APP_CONFIG = {
@@ -246,7 +247,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable} surface font-main`}
+        className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable} surface font-main scrollbar-stable`}
         suppressHydrationWarning>
         {/* Skip Navigation Link - Must be first element for accessibility */}
         <a
@@ -258,6 +259,7 @@ export default function RootLayout({
         <ErrorBoundary>
           <ThemeProvider>
             <AggressiveHydrationFix />
+            <BinaryBackground />
             <div suppressHydrationWarning>
               {/* <PerformanceAnalytics /> */}
               {/* <PerformanceDebugger /> */}

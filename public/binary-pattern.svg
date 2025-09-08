@@ -1,0 +1,78 @@
+<svg width="40" height="120" viewBox="0 0 40 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .binary-text-dim {
+        font-family: 'Courier New', monospace;
+        font-size: 10px;
+        fill: #87ceeb;
+        fill-opacity: 0.25;
+        font-weight: normal;
+      }
+      .binary-text-normal {
+        font-family: 'Courier New', monospace;
+        font-size: 10px;
+        fill: #87ceeb;
+        fill-opacity: 0.4;
+        font-weight: normal;
+      }
+      .binary-text-bright {
+        font-family: 'Courier New', monospace;
+        font-size: 10px;
+        fill: #87ceeb;
+        fill-opacity: 0.65;
+        font-weight: bold;
+      }
+    </style>
+  </defs>
+  
+  <!-- Vertical binary columns with varying brightness -->
+  <g class="binary-pattern">
+    <!-- Column 1 - Dim thread -->
+    <text x="5" y="12" class="binary-text-dim">1</text>
+    <text x="5" y="24" class="binary-text-dim">0</text>
+    <text x="5" y="36" class="binary-text-dim">1</text>
+    <text x="5" y="48" class="binary-text-dim">1</text>
+    <text x="5" y="60" class="binary-text-dim">0</text>
+    <text x="5" y="72" class="binary-text-dim">1</text>
+    <text x="5" y="84" class="binary-text-dim">0</text>
+    <text x="5" y="96" class="binary-text-dim">1</text>
+    <text x="5" y="108" class="binary-text-dim">0</text>
+    <text x="5" y="120" class="binary-text-dim">1</text>
+    
+    <!-- Column 2 - Bright thread -->
+    <text x="15" y="12" class="binary-text-bright">0</text>
+    <text x="15" y="24" class="binary-text-bright">1</text>
+    <text x="15" y="36" class="binary-text-bright">0</text>
+    <text x="15" y="48" class="binary-text-bright">0</text>
+    <text x="15" y="60" class="binary-text-bright">1</text>
+    <text x="15" y="72" class="binary-text-bright">0</text>
+    <text x="15" y="84" class="binary-text-bright">1</text>
+    <text x="15" y="96" class="binary-text-bright">0</text>
+    <text x="15" y="108" class="binary-text-bright">1</text>
+    <text x="15" y="120" class="binary-text-bright">0</text>
+    
+    <!-- Column 3 - Normal thread -->
+    <text x="25" y="12" class="binary-text-normal">1</text>
+    <text x="25" y="24" class="binary-text-normal">1</text>
+    <text x="25" y="36" class="binary-text-normal">0</text>
+    <text x="25" y="48" class="binary-text-normal">1</text>
+    <text x="25" y="60" class="binary-text-normal">0</text>
+    <text x="25" y="72" class="binary-text-normal">1</text>
+    <text x="25" y="84" class="binary-text-normal">1</text>
+    <text x="25" y="96" class="binary-text-normal">0</text>
+    <text x="25" y="108" class="binary-text-normal">1</text>
+    <text x="25" y="120" class="binary-text-normal">0</text>
+    
+    <!-- Column 4 - Bright thread -->
+    <text x="35" y="12" class="binary-text-bright">0</text>
+    <text x="35" y="24" class="binary-text-bright">0</text>
+    <text x="35" y="36" class="binary-text-bright">1</text>
+    <text x="35" y="48" class="binary-text-bright">0</text>
+    <text x="35" y="60" class="binary-text-bright">1</text>
+    <text x="35" y="72" class="binary-text-bright">0</text>
+    <text x="35" y="84" class="binary-text-bright">0</text>
+    <text x="35" y="96" class="binary-text-bright">1</text>
+    <text x="35" y="108" class="binary-text-bright">0</text>
+    <text x="35" y="120" class="binary-text-bright">1</text>
+  </g>
+</svg>
