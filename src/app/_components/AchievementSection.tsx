@@ -7,7 +7,6 @@ import {
     FiStar,
     FiTrendingUp,
     FiUsers,
-    FiExternalLink,
     FiCalendar,
     FiFilter,
     FiTarget,
@@ -16,10 +15,12 @@ import {
     FiHeart,
     FiCode,
     FiZap,
+    FiEye,
     FiShield
 } from 'react-icons/fi';
 import { achievements, Achievement } from '@/data/achievements';
 import AchievementModal from './AchievementModal';
+import ImageModal from './ImageModal';
 
 /**
  * 🏆 Achievement Section Component
@@ -36,6 +37,7 @@ import AchievementModal from './AchievementModal';
 const AchievementSection: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
     const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
     const [showAllDesktop, setShowAllDesktop] = useState<boolean>(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -166,7 +168,7 @@ const AchievementSection: React.FC = () => {
             'Certification': FiShield,
             'Milestone': FiTarget,
             'Hackathon': FiCode,
-            'Publication': FiExternalLink
+            'Publication': FiEye
         };
         return iconMap[category] || FiAward;
     };
@@ -292,7 +294,7 @@ const AchievementSection: React.FC = () => {
 
                                         {/* 🖼️ Thumbnail Image - 3:4 horizontal ratio */}
                                         {achievement.image && (
-                                            <div className="mb-3 overflow-hidden rounded-lg border border-themed flex-shrink-0">
+                                            <div className="relative mb-3 overflow-hidden rounded-lg border border-themed flex-shrink-0 cursor-pointer group/image" onClick={() => setSelectedImage({ src: achievement.image!, alt: achievement.title })}>
                                                 <img
                                                     src={achievement.image}
                                                     alt={achievement.title}
@@ -300,6 +302,10 @@ const AchievementSection: React.FC = () => {
                                                     style={{ aspectRatio: '4/3' }}
                                                     loading="lazy"
                                                 />
+                                                {/* Overlay hint on hover */}
+                                                <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                                    <FiEye className="text-white opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" size={20} />
+                                                </div>
                                             </div>
                                         )}
 
@@ -375,7 +381,7 @@ const AchievementSection: React.FC = () => {
                                                     <span className="text-xs text-muted">Verified</span>
                                                     <div className="flex items-center gap-1 text-green-600 dark:text-green-400">
                                                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                                                        <FiExternalLink size={11} />
+                                                        <FiEye size={11} />
                                                     </div>
                                                 </div>
                                             )}
@@ -481,6 +487,14 @@ const AchievementSection: React.FC = () => {
                 achievement={selectedAchievement}
                 isOpen={!!selectedAchievement}
                 onClose={() => setSelectedAchievement(null)}
+            />
+
+            {/* Image Modal */}
+            <ImageModal
+                src={selectedImage?.src || ''}
+                alt={selectedImage?.alt || ''}
+                isOpen={!!selectedImage}
+                onClose={() => setSelectedImage(null)}
             />
         </section>
     );

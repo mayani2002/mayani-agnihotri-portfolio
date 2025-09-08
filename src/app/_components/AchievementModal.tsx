@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FiX,
-    FiExternalLink,
+    FiEye,
     FiCalendar,
     FiUsers,
     FiStar,
@@ -19,6 +19,7 @@ import {
     FiShield
 } from 'react-icons/fi';
 import { Achievement } from '@/data/achievements';
+import ImageModal from './ImageModal';
 
 interface AchievementModalProps {
     achievement: Achievement | null;
@@ -38,6 +39,8 @@ interface AchievementModalProps {
  * - 🎯 Achievement importance indicators
  */
 const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen, onClose }) => {
+    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+
     if (!achievement) return null;
 
     const modalVariants = {
@@ -85,7 +88,7 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
             'Certification': FiShield,
             'Milestone': FiTarget,
             'Hackathon': FiCode,
-            'Publication': FiExternalLink
+            'Publication': FiEye
         };
         return iconMap[category] || FiAward;
     };
@@ -158,7 +161,7 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="relative surface-elevated rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                        className="relative surface-elevated rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-scrollbar scrollbar-stable"
                         onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
                         {/* 🚀 Header with Gradient Background */}
@@ -232,13 +235,21 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                                     </h3>
                                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                         {achievement.images.map((imageUrl, index) => (
-                                            <div key={index} className="relative overflow-hidden rounded-lg border border-themed hover:border-primary-light transition-colors duration-300">
+                                            <div
+                                                key={`${achievement.id}-image-${index}-${imageUrl.split('/').pop()}`}
+                                                className="relative overflow-hidden rounded-lg border border-themed hover:border-primary-light transition-colors duration-300 cursor-pointer group"
+                                                onClick={() => setSelectedImage({ src: imageUrl, alt: `${achievement.title} - Image ${index + 1}` })}
+                                            >
                                                 <img
                                                     src={imageUrl}
                                                     alt={`${achievement.title} - Image ${index + 1}`}
                                                     className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
                                                     loading="lazy"
                                                 />
+                                                {/* Hover overlay hint */}
+                                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                                                    <FiEye className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={20} />
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
@@ -319,7 +330,7 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-lg text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
                                     >
-                                        <FiExternalLink size={16} />
+                                        <FiEye size={16} />
                                         Verify Credential
                                     </a>
                                 )}
@@ -352,6 +363,14 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                     </motion.div>
                 </motion.div>
             )}
+
+            {/* Image Modal */}
+            <ImageModal
+                src={selectedImage?.src || ''}
+                alt={selectedImage?.alt || ''}
+                isOpen={!!selectedImage}
+                onClose={() => setSelectedImage(null)}
+            />
         </AnimatePresence>
     );
 };

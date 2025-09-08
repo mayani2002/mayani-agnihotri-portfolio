@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { personalInfo } from '../../data/personal';
 import { ComponentErrorBoundary } from './ErrorBoundary';
 import { OptimizedImage } from './OptimizedImage';
@@ -128,7 +129,7 @@ export const HeroSection: React.FC = () => {
                                     href={personalInfo.resumeUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center px-5 py-2.5 border-2 hero-border hero-accent hover:bg-indigo-600 dark:hover:bg-purple-300 hover:text-white dark:hover:text-purple-900 font-medium rounded-lg transition-all duration-150 text-sm sm:text-base"
+                                    className="inline-flex items-center justify-center px-5 py-2.5 border-2 hero-border hover:bg-indigo-600 dark:hover:bg-purple-700 hover:text-white font-medium rounded-lg transition-all duration-150 text-sm sm:text-base"
                                 >
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -175,9 +176,9 @@ export const HeroSection: React.FC = () => {
                                     {/* Floating Animation Wrapper */}
                                     <div className="animate-float w-full h-full">
                                         {/* Profile Picture with gradient border */}
-                                        <div className="relative w-full h-full rounded-full bg-gradient-to-br from-indigo-400 via-purple-400 to-indigo-600 dark:from-purple-400 dark:via-pink-400 dark:to-purple-600 p-3 profile-glow">
-                                            <div className="w-full h-full rounded-full overflow-hidden bg-white/20 dark:bg-white/5 backdrop-blur-sm border border-gray-300/50 dark:border-white/20">
-                                                <OptimizedImage
+                                        <div className="relative w-full h-full rounded-full bg-gradient-to-br from-indigo-400 via-purple-400 to-indigo-600 p-3 profile-glow">
+                                            <div className="w-full h-full rounded-full overflow-hidden bg-white/20 backdrop-blur-sm border border-gray-300/50">
+                                                <Image
                                                     src={personalInfo.profileImage}
                                                     alt={`${personalInfo.name} - Software Engineer Profile Picture`}
                                                     fill
@@ -185,14 +186,16 @@ export const HeroSection: React.FC = () => {
                                                     quality={90}
                                                     className="object-cover hover:scale-105 transition-transform duration-700"
                                                     sizes="(max-width: 640px) 288px, (max-width: 1024px) 320px, (max-width: 1280px) 384px, 420px"
+                                                    onError={() => console.error('Failed to load profile image:', personalInfo.profileImage)}
+                                                    onLoad={() => console.log('Profile image loaded successfully:', personalInfo.profileImage)}
                                                 />
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Static Decorative Elements - No Blinking */}
-                                    <div className="absolute -z-10 -top-4 -left-4 w-full h-full bg-indigo-500/10 dark:bg-purple-500/15 rounded-full"></div>
-                                    <div className="absolute -z-20 -top-8 -left-8 w-full h-full bg-purple-500/5 dark:bg-pink-500/10 rounded-full"></div>
+                                    <div className="absolute -z-10 -top-4 -left-4 w-full h-full bg-indigo-500/10 rounded-full"></div>
+                                    <div className="absolute -z-20 -top-8 -left-8 w-full h-full bg-purple-500/5 rounded-full"></div>
                                 </div>
                             </div>
                         </div>

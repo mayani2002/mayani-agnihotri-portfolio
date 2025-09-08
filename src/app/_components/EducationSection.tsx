@@ -10,7 +10,7 @@ import {
     FiTarget,
     FiCalendar,
     FiMapPin,
-    FiExternalLink,
+    FiEye,
     FiUser,
     FiUsers,
     FiShield,
@@ -163,7 +163,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
                             >
                                 {/* Timeline Node - Better positioning and styling */}
                                 <div className="absolute left-4 top-6 w-4 h-4 exp-timeline-dot rounded-full border-4 border-white dark:border-slate-900 shadow-lg"></div>
-                                
+
                                 {/* Timeline Line Extension - Connect to next card */}
                                 {index < filteredEducation().length - 1 && (
                                     <div className="absolute left-6 top-10 w-0.5 h-8 exp-timeline-line"></div>
@@ -286,7 +286,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
                                                 <div className="flex flex-wrap gap-1">
                                                     {edu.coursework.slice(0, 4).map((course, idx) => (
                                                         <span
-                                                            key={idx}
+                                                            key={`${edu.id}-course-${idx}-${course.slice(0, 5)}`}
                                                             className="px-1.5 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs rounded border border-blue-200 dark:border-blue-700"
                                                         >
                                                             {course}
@@ -297,7 +297,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
                                                         <>
                                                             {edu.coursework.slice(4).map((course, idx) => (
                                                                 <span
-                                                                    key={idx + 4}
+                                                                    key={`${edu.id}-course-extra-${idx}-${course.slice(0, 5)}`}
                                                                     className="px-1.5 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs rounded border border-blue-200 dark:border-blue-700"
                                                                 >
                                                                     {course}
@@ -339,7 +339,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
                                                             </h4>
                                                             <ul className="space-y-1">
                                                                 {edu.achievements.map((achievement, idx) => (
-                                                                    <li key={idx} className="flex items-start gap-2 text-sm text-muted">
+                                                                    <li key={`${edu.id}-achievement-${idx}-${achievement.slice(0, 10)}`} className="flex items-start gap-2 text-sm text-muted">
                                                                         <FiTarget size={12} className="text-green-500 mt-0.5 flex-shrink-0" />
                                                                         {achievement}
                                                                     </li>
@@ -357,7 +357,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
                                                             </h4>
                                                             <ul className="space-y-1">
                                                                 {edu.activities.map((activity, idx) => (
-                                                                    <li key={idx} className="flex items-start gap-2 text-sm text-muted">
+                                                                    <li key={`${edu.id}-activity-${idx}-${activity.slice(0, 10)}`} className="flex items-start gap-2 text-sm text-muted">
                                                                         <FiUser size={12} className="text-purple-500 mt-0.5 flex-shrink-0" />
                                                                         {activity}
                                                                     </li>
@@ -397,7 +397,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
                                                             rel="noopener noreferrer"
                                                             className="inline-flex items-center gap-2 text-sm text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors duration-200"
                                                         >
-                                                            <FiExternalLink size={12} />
+                                                            <FiEye size={12} />
                                                             Visit Institution
                                                         </a>
                                                     </div>

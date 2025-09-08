@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FiX,
     FiGithub,
-    FiExternalLink,
+    FiEye,
     FiCalendar,
     FiUsers,
     FiTag,
@@ -15,6 +15,7 @@ import {
 } from 'react-icons/fi';
 import { Project } from '@/data/projects';
 import { OptimizedImage } from './OptimizedImage';
+import ImageModal from './ImageModal';
 
 interface ProjectModalProps {
     project: Project | null;
@@ -23,6 +24,8 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+
     if (!project) return null;
 
     const modalVariants = {
@@ -79,7 +82,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="relative surface-elevated rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                        className="relative surface-elevated rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto modal-scrollbar scrollbar-stable"
                         onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
                         {/* Close Button */}
@@ -91,12 +94,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                         </button>
 
                         {/* Project Images */}
-                        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+                        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl cursor-pointer group" onClick={() => setSelectedImage({ src: project.images[0] || '/placeholder-project.svg', alt: project.title })}>
                             <OptimizedImage
-                                src={project.images[0] || '/placeholder-project.jpg'}
+                                src={project.images[0] || '/placeholder-project.svg'}
                                 alt={project.title}
                                 fill
-                                className="object-cover"
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                             {project.featured && (
                                 <div className="absolute top-4 left-4 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
@@ -104,6 +107,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                 </div>
                             )}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                            {/* Hover overlay hint */}
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                <FiEye className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={28} />
+                            </div>
                         </div>
 
                         <div className="p-6 md:p-8">
@@ -150,7 +157,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-[#60CAD9] hover:from-purple-700 hover:to-[#4fb8c7] text-white rounded-lg text-sm font-medium transition-all duration-300"
                                         >
-                                            <FiExternalLink />
+                                            <FiEye />
                                             Live Demo
                                         </a>
                                     )}
@@ -160,10 +167,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                             {/* Project Status & Role */}
                             <div className="flex flex-wrap gap-3 mb-6">
                                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${project.status === 'Completed'
-                                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                                        : project.status === 'In Progress'
-                                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                                            : 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
+                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                                    : project.status === 'In Progress'
+                                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+                                        : 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
                                     }`}>
                                     {project.status}
                                 </span>
@@ -251,7 +258,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                         </h3>
                                         <ul className="space-y-2">
                                             {project.challenges.map((challenge, index) => (
-                                                <li key={index} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
+                                                <li key={`${project.id}-challenge-${index}-${challenge.slice(0, 10)}`} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
                                                     <span className="text-orange-500 mt-1">•</span>
                                                     {challenge}
                                                 </li>
@@ -268,7 +275,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                         </h3>
                                         <ul className="space-y-2">
                                             {project.learnings.map((learning, index) => (
-                                                <li key={index} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
+                                                <li key={`${project.id}-learning-${index}-${learning.slice(0, 10)}`} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
                                                     <span className="text-green-500 mt-1">•</span>
                                                     {learning}
                                                 </li>
@@ -281,6 +288,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                     </motion.div>
                 </motion.div>
             )}
+
+            {/* Image Modal */}
+            <ImageModal
+                src={selectedImage?.src || ''}
+                alt={selectedImage?.alt || ''}
+                isOpen={!!selectedImage}
+                onClose={() => setSelectedImage(null)}
+            />
         </AnimatePresence>
     );
 };

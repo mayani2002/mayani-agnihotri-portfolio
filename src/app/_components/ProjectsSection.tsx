@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { FiGithub, FiExternalLink, FiEye, FiCalendar, FiUsers, FiTrendingUp } from 'react-icons/fi';
+import { FiGithub, FiEye, FiCalendar, FiUsers, FiTrendingUp } from 'react-icons/fi';
 import { projects, Project } from '@/data/projects';
 import { OptimizedImage } from './OptimizedImage';
 import ProjectModal from './ProjectModal';
+import ImageModal from './ImageModal';
 import { NoSSR } from './NoSSR';
 import { motion, useInView } from 'framer-motion';
 
@@ -12,6 +13,7 @@ import { motion, useInView } from 'framer-motion';
 const ProjectsSection: React.FC = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>('All');
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
     const [expandedTechs, setExpandedTechs] = useState<Set<string>>(new Set());
     const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
     const [showAllDesktop, setShowAllDesktop] = useState<boolean>(false);
@@ -26,16 +28,16 @@ const ProjectsSection: React.FC = () => {
         const calculateProjectCardsPerRow = () => {
             const width = window.innerWidth;
             const isMobileSize = width < 768;
-            
+
             if (isMobileSize) {
                 return 1; // Mobile and tablet show 1 project per row
             }
-            
+
             // Calculate based on project grid CSS auto-fit logic
             // Using minmax values for projects: minmax(350px-400px, 1fr)
             let minCardWidth = 350;
             let gap = 24; // 1.5rem = 24px
-            
+
             // Adjust based on CSS breakpoints for projects
             if (width >= 1400) {
                 minCardWidth = 380;
@@ -47,11 +49,11 @@ const ProjectsSection: React.FC = () => {
                 // Tablet and below show 1 per row
                 return 1;
             }
-            
+
             // Calculate container width (accounting for padding)
             const containerPadding = width < 640 ? 32 : width < 1024 ? 64 : 128;
             const availableWidth = width - containerPadding;
-            
+
             // Calculate how many project cards fit per row
             const cardsInRow = Math.floor((availableWidth + gap) / (minCardWidth + gap));
             return Math.max(1, cardsInRow);
@@ -222,7 +224,7 @@ const ProjectsSection: React.FC = () => {
                             className="group relative exp-card-bg rounded-lg border border-themed transition-all duration-300 p-4 project-card-width"
                         >
                             {/* Project Image */}
-                            <div className="relative h-48 overflow-hidden rounded-lg mb-3">
+                            <div className="relative h-48 overflow-hidden rounded-lg mb-3 cursor-pointer" onClick={() => setSelectedImage({ src: `https://picsum.photos/seed/${project.id}/600/400`, alt: project.title })}>
                                 <OptimizedImage
                                     src={`https://picsum.photos/seed/${project.id}/600/400`}
                                     alt={project.title}
@@ -234,6 +236,10 @@ const ProjectsSection: React.FC = () => {
                                         Featured
                                     </div>
                                 )}
+                                {/* Overlay hint on hover */}
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                    <FiEye className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={24} />
+                                </div>
                             </div>
 
                             {/* Project Content */}
@@ -326,7 +332,7 @@ const ProjectsSection: React.FC = () => {
                                             className="p-2 exp-card-bg hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-colors duration-300 text-secondary hover:text-primary border border-themed"
                                             title="Live Demo"
                                         >
-                                            <FiExternalLink size={16} />
+                                            <FiEye size={16} />
                                         </a>
                                     )}
                                 </div>
@@ -336,37 +342,37 @@ const ProjectsSection: React.FC = () => {
                 </div>
 
                 {/* 📱 Show More Button - Mobile & Desktop with Dynamic 2-Row Limit */}
-                {((isMobile && !showAllMobile && filteredProjects.length > 3) || 
-                  (!isMobile && !showAllDesktop && filteredProjects.length > cardsPerRow * 2)) && (
-                    <div className="flex justify-center mt-8">
-                        <button
-                            onClick={handleShowMore}
-                            className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium transition-all duration-300"
-                            style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
-                        >
-                            <span>Show {filteredProjects.length - projectsToDisplay.length} More</span>
-                            <FiTrendingUp size={16} />
-                        </button>
-                    </div>
-                )}
+                {((isMobile && !showAllMobile && filteredProjects.length > 3) ||
+                    (!isMobile && !showAllDesktop && filteredProjects.length > cardsPerRow * 2)) && (
+                        <div className="flex justify-center mt-8">
+                            <button
+                                onClick={handleShowMore}
+                                className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium transition-all duration-300"
+                                style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
+                            >
+                                <span>Show {filteredProjects.length - projectsToDisplay.length} More</span>
+                                <FiTrendingUp size={16} />
+                            </button>
+                        </div>
+                    )}
 
                 {/* Floating Show Less Button - Mobile & Desktop */}
-                {((isMobile && showAllMobile && filteredProjects.length > 3) || 
-                  (!isMobile && showAllDesktop && filteredProjects.length > cardsPerRow * 2)) && 
-                 isInViewport && (
-                    <div className="fixed bottom-20 right-4 z-50">
-                        <button
-                            onClick={handleShowLess}
-                            className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9] hover:text-white rounded-full font-medium shadow-xl bg-white dark:bg-gray-900 transition-all duration-300"
-                            style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
-                        >
-                            <span>Show Less</span>
-                            <div style={{ transform: 'rotate(180deg)', transition: 'transform 0.2s' }}>
-                                <FiTrendingUp size={16} />
-                            </div>
-                        </button>
-                    </div>
-                )}
+                {((isMobile && showAllMobile && filteredProjects.length > 3) ||
+                    (!isMobile && showAllDesktop && filteredProjects.length > cardsPerRow * 2)) &&
+                    isInViewport && (
+                        <div className="fixed bottom-20 right-4 z-50">
+                            <button
+                                onClick={handleShowLess}
+                                className="flex items-center gap-2 px-4 py-2 border-2 text-[#60CAD9] hover:bg-[#60CAD9]  rounded-full font-medium shadow-xl bg-white dark:bg-gray-900 transition-all duration-300"
+                                style={{ borderColor: '#60CAD9', color: '#60CAD9' }}
+                            >
+                                <span>Show Less</span>
+                                <div style={{ transform: 'rotate(180deg)', transition: 'transform 0.2s' }}>
+                                    <FiTrendingUp size={16} />
+                                </div>
+                            </button>
+                        </div>
+                    )}
 
                 {/* Empty State */}
                 {filteredProjects.length === 0 && (
@@ -390,6 +396,14 @@ const ProjectsSection: React.FC = () => {
                     project={selectedProject}
                     isOpen={!!selectedProject}
                     onClose={() => setSelectedProject(null)}
+                />
+
+                {/* Image Modal */}
+                <ImageModal
+                    src={selectedImage?.src || ''}
+                    alt={selectedImage?.alt || ''}
+                    isOpen={!!selectedImage}
+                    onClose={() => setSelectedImage(null)}
                 />
             </NoSSR>
         </section>
