@@ -96,11 +96,11 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id = 'education' })
     };
 
     return (
-        <section ref={sectionRef} id="education" className="py-20 relative overflow-hidden">
+        <section ref={sectionRef} id="education" className="py-20 relative overflow-hidden" aria-labelledby="education-heading">
             <div className="adaptive-container">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
+                    <h2 id="education-heading" className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
                         Education & Learning
                     </h2>
                     <motion.div

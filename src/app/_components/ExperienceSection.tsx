@@ -11,7 +11,7 @@ interface ExperienceCardProps {
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, index }) => {
-    
+
     const formatDate = (dateString: string) => {
         if (dateString === 'Present') return 'Present';
         const date = new Date(dateString);
@@ -242,11 +242,15 @@ const ExperienceSection: React.FC = () => {
             ref={sectionRef}
             className="min-h-screen py-12 px-4 sm:px-6 lg:px-8"
             id="experience"
+            aria-labelledby="experience-heading"
         >
             <div className="max-w-6xl mx-auto">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
+                    <h2
+                        id="experience-heading"
+                        className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam"
+                    >
                         Work Experience
                     </h2>
 
@@ -273,7 +277,7 @@ const ExperienceSection: React.FC = () => {
                     ))}
                 </div>
 
-             
+
             </div>
         </section>
     );

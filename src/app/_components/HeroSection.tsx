@@ -72,6 +72,7 @@ export const HeroSection: React.FC = () => {
             <section
                 id="hero"
                 className="min-h-screen flex items-center justify-center relative"
+                aria-labelledby="hero-name"
             >
 
                 {/* Main Content Container - Margins handled by page layout */}
@@ -90,7 +91,7 @@ export const HeroSection: React.FC = () => {
 
                             {/* Large Animated Name - STANDARD SIZE - Make it bold */}
                             <div>
-                                <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-2 hero-text-glow min-h-[50px] sm:min-h-[65px] lg:min-h-[80px] flex items-center justify-center lg:justify-start font-kalam
+                                <h1 id="hero-name" className={`text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-2 hero-text-glow min-h-[50px] sm:min-h-[65px] lg:min-h-[80px] flex items-center justify-center lg:justify-start font-kalam
                                     }`}>
                                     <span className="typing-cursor">
                                         {typingText}

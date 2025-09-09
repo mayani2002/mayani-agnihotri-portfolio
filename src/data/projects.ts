@@ -45,12 +45,12 @@ export const projects: Project[] = [
             "AWS"
         ],
         "images": [],
-        "demoUrl": "",
-        "githubUrl": "",
+        "demoUrl": "https://smb-ai-query-assistant.lovable.app/",
+        "githubUrl": "https://github.com/mayani2002/quick-q-bot",
         "caseStudyUrl": "",
         "startDate": "2025-09-01",
-        "teamSize": 3,
-        "role": "Fullstack Developer",
+        "teamSize": 1,
+        "role": "Software Developer",
         "challenges": [
             "Implementing secure real-time chatrooms",
             "Integrating AI with business-specific catalogues",

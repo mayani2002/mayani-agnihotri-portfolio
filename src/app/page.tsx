@@ -5,6 +5,7 @@ import RightVerticalNav from './_components/RightVerticalNav';
 import LeftSidebar from "./_components/LeftSidebar";
 import Footer from "./_components/Footer";
 import HeroSection from "./_components/HeroSection";
+import AboutSection from "./_components/AboutSection";
 import ExperienceSection from "./_components/ExperienceSection";
 import ProjectsSection from "./_components/ProjectsSection";
 import AchievementSection from "./_components/AchievementSection";
@@ -38,7 +39,7 @@ export const Home: React.FC = () => {
         const heroHeight = heroSection.offsetHeight;
         const scrollPosition = window.scrollY;
         const pastHero = scrollPosition > heroHeight * 0.6; // Trigger when 60% past hero
-        
+
         if (pastHero && !hasScrolledPastHero && isDesktop) {
           setHasScrolledPastHero(true);
           setSidebarAutoOpened(true);
@@ -76,13 +77,16 @@ export const Home: React.FC = () => {
         {/* Hero Section - Full Screen */}
         <HeroSection />
 
+        {/* About Section */}
+        <AboutSection />
+
         {/* Work Experience Section */}
         <ExperienceSection />
 
         {/* Projects Section */}
         <ProjectsSection />
 
-        {/* Achievements Section */}        
+        {/* Achievements Section */}
         <AchievementSection />
 
         {/* Education Section */}
@@ -93,7 +97,7 @@ export const Home: React.FC = () => {
         <AboutSection />
         <SkillsSection />
         <ContactSection />
-        */} 
+        */}
       </main>
       {/* Footer */}
       <div className={`
@@ -101,7 +105,7 @@ export const Home: React.FC = () => {
         ${isDesktop && isSidebarOpen ? 'md:ml-64' : ''}
         md:mr-24 lg:mr-20
       `}>
-        <CallToAction /> 
+        <CallToAction />
         <Footer />
       </div>
     </ErrorBoundary>

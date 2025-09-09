@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik, Kalam, Qwitcher_Grypen } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 // Component imports
@@ -180,6 +181,17 @@ export default function RootLayout({
           }}
         />
 
+        {/* Performance Optimizations */}
+        <link rel="preload" href="/profile-mayani.jpeg" as="image" type="image/jpeg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+        {/* Theme and Mobile Optimizations */}
+        <meta name="theme-color" content="#87ceeb" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Mayani Portfolio" />
+
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
@@ -245,10 +257,52 @@ export default function RootLayout({
             })
           }}
         />
+
+        {/* Creative Work Portfolio Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "name": "Mayani Agnihotri Software Engineering Portfolio",
+              "description": "A comprehensive portfolio showcasing full-stack web applications, AI-powered solutions, and innovative software projects",
+              "creator": {
+                "@type": "Person",
+                "name": "Mayani Agnihotri",
+                "jobTitle": "Software Engineer",
+                "knowsAbout": ["React", "Node.js", "JavaScript", "TypeScript", "Python", "Full Stack Development"]
+              },
+              "dateCreated": "2024",
+              "genre": "Software Development Portfolio",
+              "keywords": ["Software Engineer", "Full Stack Developer", "React", "Node.js", "Portfolio", "Web Development"],
+              "inLanguage": "en-US"
+            })
+          }}
+        />
       </head>
       <body
         className={`${rubik.variable} ${kalam.variable} ${qwitcherGrypen.variable} surface font-main scrollbar-stable`}
         suppressHydrationWarning>
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'GA_MEASUREMENT_ID', {
+              page_title: document.title,
+              page_location: window.location.href,
+              anonymize_ip: true,
+            });
+          `}
+        </Script>
+
         {/* Skip Navigation Link - Must be first element for accessibility */}
         <a
           href="#main"

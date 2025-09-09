@@ -173,11 +173,19 @@ const ProjectsSection: React.FC = () => {
     };
 
     return (
-        <section ref={sectionRef} id="projects" className="py-20">
+        <section
+            ref={sectionRef}
+            id="projects"
+            className="py-20"
+            aria-labelledby="projects-heading"
+        >
             <div className="adaptive-container">
                 {/* Section Header - Match ExperienceSection exactly */}
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam">
+                    <h2
+                        id="projects-heading"
+                        className="text-4xl md:text-5xl font-bold text-primary mb-4 font-kalam"
+                    >
                         Featured Projects
                     </h2>
                     <motion.div

@@ -9,11 +9,13 @@ import {
     FaDev,
     FaTrophy,
     FaUserPen,
+    FaUser,
 } from 'react-icons/fa6';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
     { href: '#hero', icon: <FaHouse size={18} />, label: 'Home', color: 'text-gray-600 dark:text-gray-400' },
+    { href: '#about', icon: <FaUser size={18} />, label: 'About', color: 'text-emerald-600 dark:text-emerald-400' },
     { href: '#experience', icon: <FaBriefcase size={18} />, label: 'Work', color: 'text-sky-600 dark:text-sky-400' },
     { href: '#projects', icon: <FaFileCode size={18} />, label: 'Projects', color: 'text-cyan-600 dark:text-cyan-400' },
     { href: '#achievements', icon: <FaTrophy size={18} />, label: 'Success', color: 'text-yellow-500 dark:text-yellow-400' },
