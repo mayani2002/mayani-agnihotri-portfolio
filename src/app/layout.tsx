@@ -8,7 +8,7 @@ import { ThemeProvider } from './_utils/ThemeProvider';
 import { ErrorBoundary } from './_components/ErrorBoundary';
 import { PerformanceAnalytics, PerformanceDebugger } from './_components/PerformanceAnalytics';
 import { SEOValidator, AccessibilityValidator, PerformanceBudget, DevConsoleCommands } from './_components/DevUtils';
-import { AggressiveHydrationFix } from './_components/AggressiveHydrationFix';
+import ExtensionAttributeCleanup from './_components/ExtensionAttributeCleanup';
 import { BinaryBackground } from './_components/BinaryBackground';
 
 // App configuration
