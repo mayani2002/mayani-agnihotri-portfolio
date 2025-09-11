@@ -11,7 +11,7 @@ const GlobalImageModal: React.FC = () => {
 
     // Debug: Log when modal opens
     React.useEffect(() => {
-        if (imageModal.isOpen) {
+        if (imageModal.isOpen && process.env.NODE_ENV === 'development') {
             console.log('🖼️ GlobalImageModal opened with:', {
                 src: imageModal.src,
                 alt: imageModal.alt,
@@ -96,8 +96,8 @@ const GlobalImageModal: React.FC = () => {
                                 sizes="90vw"
                                 quality={90}
                                 priority
-                                onError={() => console.error('❌ Image failed to load:', imageModal.src)}
-                                onLoad={() => console.log('✅ Image loaded successfully:', imageModal.src)}
+                                onError={() => process.env.NODE_ENV === 'development' && console.error('❌ Image failed to load:', imageModal.src)}
+                                onLoad={() => process.env.NODE_ENV === 'development' && console.log('✅ Image loaded successfully:', imageModal.src)}
                             />
                         </div>
 

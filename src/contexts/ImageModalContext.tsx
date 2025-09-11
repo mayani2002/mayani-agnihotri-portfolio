@@ -36,7 +36,9 @@ export const ImageModalProvider: React.FC<ImageModalProviderProps> = ({ children
     });
 
     const openImageModal = (src: string, alt: string) => {
-        console.log('🔥 openImageModal called with:', { src, alt });
+        if (process.env.NODE_ENV === 'development') {
+            console.log('🔥 openImageModal called with:', { src, alt });
+        }
         setImageModal({
             src,
             alt,
