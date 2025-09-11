@@ -3,17 +3,16 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { FiGithub, FiEye, FiCalendar, FiUsers, FiTrendingUp } from 'react-icons/fi';
 import { projects, Project } from '@/data/projects';
-import { OptimizedImage } from './OptimizedImage';
+import { OptimizedImage } from './OptimizedImageNew';
 import ProjectModal from './ProjectModal';
-import ImageModal from './ImageModal';
-import { NoSSR } from './NoSSR';
+import { useImageModal } from '@/contexts/ImageModalContext';
 import { motion, useInView } from 'framer-motion';
 
 
 const ProjectsSection: React.FC = () => {
+    const { openImageModal } = useImageModal();
     const [selectedFilter, setSelectedFilter] = useState<string>('All');
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
     const [expandedTechs, setExpandedTechs] = useState<Set<string>>(new Set());
     const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
     const [showAllDesktop, setShowAllDesktop] = useState<boolean>(false);
@@ -226,18 +225,20 @@ const ProjectsSection: React.FC = () => {
 
                 {/* Projects Grid - Flexible Layout */}
                 <div className="projects-grid-flexible">
-                    {projectsToDisplay.map((project) => (
+                    {projectsToDisplay.map((project, index) => (
                         <div
                             key={project.id}
                             className="group relative exp-card-bg rounded-lg border border-themed transition-all duration-300 p-4 project-card-width"
                         >
                             {/* Project Image */}
-                            <div className="relative h-48 overflow-hidden rounded-lg mb-3 cursor-pointer" onClick={() => setSelectedImage({ src: `https://picsum.photos/seed/${project.id}/600/400`, alt: project.title })}>
+                            <div className="relative h-48 overflow-hidden rounded-lg mb-3 cursor-pointer" onClick={() => openImageModal(project.images?.[0] || '/placeholder-project.svg', project.title)}>
                                 <OptimizedImage
-                                    src={`https://picsum.photos/seed/${project.id}/600/400`}
+                                    src={project.images?.[0] || '/placeholder-project.svg'}
                                     alt={project.title}
                                     fill
                                     className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                    quality={80}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                                 {project.featured && (
                                     <div className="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
@@ -290,9 +291,9 @@ const ProjectsSection: React.FC = () => {
                                         {(expandedTechs.has(project.id)
                                             ? project.technologies
                                             : project.technologies.slice(0, 6)
-                                        ).map((tech) => (
+                                        ).map((tech, index) => (
                                             <span
-                                                key={tech}
+                                                key={`${project.id}-tech-${index}`}
                                                 className="exp-tech-badge px-2 py-1 text-xs rounded-full font-medium"
                                             >
                                                 {tech}
@@ -315,7 +316,12 @@ const ProjectsSection: React.FC = () => {
                                 {/* Action Buttons */}
                                 <div className="flex gap-3 pt-3 border-t border-themed">
                                     <button
-                                        onClick={() => setSelectedProject(project)}
+                                        onClick={() => {
+                                            // Prevent double click issues
+                                            if (selectedProject !== project) {
+                                                setSelectedProject(project);
+                                            }
+                                        }}
                                         className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-[#60CAD9] hover:from-purple-700 hover:to-[#4fb8c7] text-white px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300"
                                     >
                                         <FiEye size={14} />
@@ -399,21 +405,11 @@ const ProjectsSection: React.FC = () => {
             </div>
 
             {/* Project Detail Modal */}
-            <NoSSR>
-                <ProjectModal
-                    project={selectedProject}
-                    isOpen={!!selectedProject}
-                    onClose={() => setSelectedProject(null)}
-                />
-
-                {/* Image Modal */}
-                <ImageModal
-                    src={selectedImage?.src || ''}
-                    alt={selectedImage?.alt || ''}
-                    isOpen={!!selectedImage}
-                    onClose={() => setSelectedImage(null)}
-                />
-            </NoSSR>
+            <ProjectModal
+                project={selectedProject}
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
         </section>
     );
 };

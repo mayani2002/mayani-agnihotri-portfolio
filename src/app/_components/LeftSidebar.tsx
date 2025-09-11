@@ -1,7 +1,7 @@
-
 'use client';
 import { useState, useEffect } from "react";
 import { FaXTwitter, FaLinkedinIn, FaGithub, FaBars, FaAngleLeft, FaEnvelope } from "react-icons/fa6";
+import { OptimizedImage } from './OptimizedImageNew';
 
 interface LeftSidebarProps {
     isOpen?: boolean;

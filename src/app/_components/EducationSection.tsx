@@ -18,7 +18,7 @@ import {
     FiChevronUp,
     FiHome
 } from 'react-icons/fi';
-import { OptimizedImage } from './OptimizedImage';
+import { OptimizedImage } from './OptimizedImageNew';
 import { education } from '../../data/education';
 import type { Education } from '../../data/education';
 

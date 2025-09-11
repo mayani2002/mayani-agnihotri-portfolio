@@ -27,14 +27,14 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-        "id": "project-1",
-        "title": "SMB AI Query Assistant",
-        "description": "A platform for small business owners to handle bulk customer queries using AI-powered chatrooms.",
-        "longDescription": "SMB AI Query Assistant enables small business owners to upload their catalogue and FAQs, generating a permanent shareable chat link for customers. The chatbot uses AI and retrieval techniques to answer queries based on the uploaded data, helping businesses engage customers efficiently.",
-        "category": "Web App",
-        "status": "In Progress",
-        "featured": true,
-        "technologies": [
+        id: "project-1",
+        title: "SMB AI Query Assistant",
+        description: "A platform for small business owners to handle bulk customer queries using AI-powered chatrooms.",
+        longDescription: "SMB AI Query Assistant enables small business owners to upload their catalogue and FAQs, generating a permanent shareable chat link for customers. The chatbot uses AI and retrieval techniques to answer queries based on the uploaded data, helping businesses engage customers efficiently.",
+        category: "Web App",
+        status: "In Progress",
+        featured: true,
+        technologies: [
             "React",
             "Node.js",
             "Express",
@@ -44,26 +44,26 @@ export const projects: Project[] = [
             "WebSockets",
             "AWS"
         ],
-        "images": [],
-        "demoUrl": "https://smb-ai-query-assistant.lovable.app/",
-        "githubUrl": "https://github.com/mayani2002/quick-q-bot",
-        "caseStudyUrl": "",
-        "startDate": "2025-09-01",
-        "teamSize": 1,
-        "role": "Software Developer",
-        "challenges": [
+        images: ["/projects/Project-thumbnail1.png"],
+        demoUrl: "https://smb-ai-query-assistant.lovable.app/",
+        githubUrl: "https://github.com/mayani2002/quick-q-bot",
+        caseStudyUrl: "",
+        startDate: "2025-09-01",
+        teamSize: 1,
+        role: "Software Developer",
+        challenges: [
             "Implementing secure real-time chatrooms",
             "Integrating AI with business-specific catalogues",
             "Ensuring multi-tenant data isolation"
         ],
-        "learnings": [
+        learnings: [
             "Building RAG pipelines for domain-specific chatbots",
             "Optimizing WebSocket performance",
             "Designing secure SaaS architectures"
         ],
-        "metrics": {
-            "users": 10,
-            "performance": "Handles 200 concurrent chat sessions with low latency"
+        metrics: {
+            users: 10,
+            performance: "Handles 200 concurrent chat sessions with low latency"
         }
     },
     // {

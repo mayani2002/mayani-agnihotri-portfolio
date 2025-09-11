@@ -21,6 +21,8 @@ import {
 import { achievements, Achievement } from '@/data/achievements';
 import AchievementModal from './AchievementModal';
 import ImageModal from './ImageModal';
+import { useImageModal } from '@/contexts/ImageModalContext';
+import { OptimizedImage } from './OptimizedImageNew';
 
 /**
  * 🏆 Achievement Section Component
@@ -35,9 +37,9 @@ import ImageModal from './ImageModal';
  * - 👁️ Viewport-aware show less button
  */
 const AchievementSection: React.FC = () => {
+    const { openImageModal } = useImageModal();
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
-    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
     const [showAllMobile, setShowAllMobile] = useState<boolean>(false);
     const [showAllDesktop, setShowAllDesktop] = useState<boolean>(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -233,9 +235,9 @@ const AchievementSection: React.FC = () => {
                     >
                         All
                     </button>
-                    {categories.slice(1).map((category) => (
+                    {categories.slice(1).map((category, index) => (
                         <button
-                            key={category}
+                            key={`category-filter-${category}-${index}`}
                             onClick={() => setSelectedCategory(category)}
                             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${selectedCategory === category
                                 ? 'bg-purple-600 text-white shadow-md'
@@ -255,7 +257,7 @@ const AchievementSection: React.FC = () => {
 
                             return (
                                 <motion.div
-                                    key={achievement.id}
+                                    key={`achievement-card-${achievement.id || 'unknown'}-${index}`}
                                     layout
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -294,13 +296,14 @@ const AchievementSection: React.FC = () => {
 
                                         {/* 🖼️ Thumbnail Image - 3:4 horizontal ratio */}
                                         {achievement.image && (
-                                            <div className="relative mb-3 overflow-hidden rounded-lg border border-themed flex-shrink-0 cursor-pointer group/image" onClick={() => setSelectedImage({ src: achievement.image!, alt: achievement.title })}>
-                                                <img
+                                            <div className="relative mb-3 overflow-hidden rounded-lg border border-themed flex-shrink-0 cursor-pointer group/image" onClick={() => openImageModal(achievement.image!, achievement.title)}>
+                                                <OptimizedImage
                                                     src={achievement.image}
                                                     alt={achievement.title}
+                                                    width={300}
+                                                    height={112}
                                                     className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300"
-                                                    style={{ aspectRatio: '4/3' }}
-                                                    loading="lazy"
+                                                    quality={80}
                                                 />
                                                 {/* Overlay hint on hover */}
                                                 <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/10 transition-colors duration-300 flex items-center justify-center">
@@ -487,14 +490,6 @@ const AchievementSection: React.FC = () => {
                 achievement={selectedAchievement}
                 isOpen={!!selectedAchievement}
                 onClose={() => setSelectedAchievement(null)}
-            />
-
-            {/* Image Modal */}
-            <ImageModal
-                src={selectedImage?.src || ''}
-                alt={selectedImage?.alt || ''}
-                isOpen={!!selectedImage}
-                onClose={() => setSelectedImage(null)}
             />
         </section>
     );

@@ -10,15 +10,19 @@ import { PerformanceAnalytics, PerformanceDebugger } from './_components/Perform
 import { SEOValidator, AccessibilityValidator, PerformanceBudget, DevConsoleCommands } from './_components/DevUtils';
 import ExtensionAttributeCleanup from './_components/ExtensionAttributeCleanup';
 import { BinaryBackground } from './_components/BinaryBackground';
+import { ImageModalProvider } from '@/contexts/ImageModalContext';
+import GlobalImageModal from './_components/GlobalImageModal';
 
 // App configuration
 const APP_CONFIG = {
   name: 'Mayani Agnihotri Portfolio',
   author: 'Mayani Agnihotri',
   description: 'Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems. Experienced in startups, freelancing, and building end-to-end products. Open to SDE-1 opportunities at top tech companies and freelance collaborations worldwide.',
-  url: 'https://mayani-agnihotri.vercel.app'
+  url: 'https://mayaniagnihotri.com'
 } as const;
 
+// Dynamic site URL based on environment
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mayaniagnihotri.com';
 
 const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
 const kalam = Kalam({
@@ -37,13 +41,13 @@ export const metadata: Metadata = {
   },
   description: APP_CONFIG.description,
   keywords: "Mayani Agnihotri, Software Engineer, Fullstack Developer, React Developer, Node.js Developer, JavaScript Engineer, Python Developer, Freelance Software Developer, Frontend Engineer, Backend Engineer, SDE-1 Portfolio, Web Developer, API Development, Startup Developer, ATS Friendly Resume, Product Development, Hackathon Winner",
-  authors: [{ name: "Mayani Agnihotri", url: "https://mayani-agnihotri.vercel.app" }],
+  authors: [{ name: "Mayani Agnihotri", url: "https://mayaniagnihotri.com" }],
   creator: "Mayani Agnihotri",
   publisher: "Mayani Agnihotri",
   alternates: {
-    canonical: "https://mayani-agnihotri.vercel.app",
+    canonical: "https://mayaniagnihotri.com",
     languages: {
-      'en-US': 'https://mayani-agnihotri.vercel.app',
+      'en-US': 'https://mayaniagnihotri.com',
     },
   },
   robots: {
@@ -62,13 +66,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mayani-agnihotri.vercel.app',
+    url: 'https://mayaniagnihotri.com',
     title: 'Mayani Agnihotri | Software Engineer | Fullstack Developer',
     description: 'Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems.',
     siteName: 'Mayani Agnihotri Portfolio',
     images: [
       {
-        url: 'https://mayani-agnihotri.vercel.app/og-image.jpg',
+        url: 'https://mayaniagnihotri.com/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Mayani Agnihotri - Software Engineer Portfolio',
@@ -81,7 +85,7 @@ export const metadata: Metadata = {
     creator: '@mayani_agnihotri',
     title: 'Mayani Agnihotri | Software Engineer | Fullstack Developer',
     description: 'Portfolio of Mayani Agnihotri – Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems.',
-    images: ['https://mayani-agnihotri.vercel.app/og-image.jpg'],
+    images: ['https://https://mayaniagnihotri.com/og-image.jpg'],
   },
   verification: {
     google: 'your-google-verification-code',
@@ -202,8 +206,8 @@ export default function RootLayout({
               "name": "Mayani Agnihotri",
               "jobTitle": "Software Engineer & Fullstack Developer",
               "description": "Software Engineer and Fullstack Developer skilled in React, Node.js, JavaScript, Python, and scalable backend systems.",
-              "url": "https://mayani-agnihotri.vercel.app",
-              "image": "https://mayani-agnihotri.vercel.app/profile-mayani.jpeg",
+              "url": "https://mayaniagnihotri.com",
+              "image": "https://mayaniagnihotri.com/profile-mayani.jpeg",
               "email": "mayani.agni01@gmail.com",
               "address": {
                 "@type": "Place",
@@ -246,13 +250,13 @@ export default function RootLayout({
               "@type": "WebSite",
               "name": "Mayani Agnihotri Portfolio",
               "description": "Professional portfolio showcasing software engineering projects and expertise",
-              "url": "https://mayani-agnihotri.vercel.app",
+              "url": "https://mayaniagnihotri.com",
               "author": {
                 "@type": "Person",
                 "name": "Mayani Agnihotri"
               },
               "inLanguage": "en-US",
-              "copyrightYear": "2024",
+              "copyrightYear": "2025",
               "genre": "Portfolio"
             })
           }}
@@ -273,9 +277,9 @@ export default function RootLayout({
                 "jobTitle": "Software Engineer",
                 "knowsAbout": ["React", "Node.js", "JavaScript", "TypeScript", "Python", "Full Stack Development"]
               },
-              "dateCreated": "2024",
+              "dateCreated": "2025",
               "genre": "Software Development Portfolio",
-              "keywords": ["Software Engineer", "Full Stack Developer", "React", "Node.js", "Portfolio", "Web Development"],
+              "keywords": ["Software Engineer", "Full Stack Developer", "React", "Node.js", "Portfolio", "Web Development", "Machine Learning", "AI"],
               "inLanguage": "en-US"
             })
           }}
@@ -286,23 +290,21 @@ export default function RootLayout({
         suppressHydrationWarning>
 
         {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-          strategy="afterInteractive"
-        />
+        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'GA_MEASUREMENT_ID', {
+
+            gtag('config',  '${process.env.NEXT_PUBLIC_GA_ID}',{
               page_title: document.title,
               page_location: window.location.href,
               anonymize_ip: true,
             });
           `}
         </Script>
-
         {/* Skip Navigation Link - Must be first element for accessibility */}
         <a
           href="#main"
@@ -312,17 +314,20 @@ export default function RootLayout({
         </a>
         <ErrorBoundary>
           <ThemeProvider>
-            <AggressiveHydrationFix />
-            <BinaryBackground />
-            <div suppressHydrationWarning>
-              {/* <PerformanceAnalytics /> */}
-              {/* <PerformanceDebugger /> */}
-              <SEOValidator />
-              <AccessibilityValidator />
-              <PerformanceBudget />
-              <DevConsoleCommands />
-            </div>
-            {children}
+            <ImageModalProvider>
+              <ExtensionAttributeCleanup />
+              <BinaryBackground />
+              <div suppressHydrationWarning>
+                {/* <PerformanceAnalytics /> */}
+                {/* <PerformanceDebugger /> */}
+                <SEOValidator />
+                <AccessibilityValidator />
+                <PerformanceBudget />
+                <DevConsoleCommands />
+              </div>
+              {children}
+              <GlobalImageModal />
+            </ImageModalProvider>
           </ThemeProvider>
         </ErrorBoundary>
       </body>

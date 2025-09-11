@@ -20,7 +20,7 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
     {
-        id: "achievement-1",
+        id: "innervehacks-2022-first-place",
         title: "1st Position - InnerveHacks 2022",
         description: "Won first place in a 72-hour hackathon with a team of 4 developers. For the problem statement Smart Waste Management System, we designed a prototype platform to bridge the gap between citizens, garbage collection trucks, and waste recycling companies. We developed a citizen dashboard enabling users to schedule garbage pickups by waste category, date, time, and location (via map or geolocation). To optimize logistics, we implemented TSP (Travelling Salesman Problem) and VRP (Vehicle Routing Problem) algorithms to plan efficient pickup routes, which were then displayed on the truck drivers’ dashboard using the Google Maps API.",
         category: "Hackathon",
@@ -40,7 +40,7 @@ export const achievements: Achievement[] = [
         }
     },
     {
-        id: "achievement-2",
+        id: "aws-cloud-practitioner-2024",
         title: "AWS Certified Cloud Practitioner",
         description: "Successfully obtained AWS Certified Cloud Practitioner certification, demonstrating foundational knowledge of AWS cloud services and best practices.",
         category: "Certification",
@@ -52,7 +52,7 @@ export const achievements: Achievement[] = [
         skills: ["AWS", "Amazon Web Services", "Cloud Computing", "DevOps", "Cloud Fundamentals", "S3", "EC2", "IAM", "RDS", "Lambda"]
     },
     {
-        id: "achievement-3",
+        id: "ideafind-plus-2022-first-place",
         title: "1st Place - IdeaFind+ 2022",
         description: "Won 1st place in the Education category at the IdeaFind+ Ideathon for developing PEDASSIST, an innovative platform addressing the critical issue of early childhood development. The platform empowers parents by educating them on brain development through engaging quizzes, lessons, chapters, and rewards. Identified a root cause often overlooked in society and designed a scalable solution to raise parental awareness. Showcased teamwork, communication, and presentation excellence while pitching the idea to a panel of judges, earning recognition for delivering a thoughtful, practical, and high-impact approach to a pressing social challenge.",
         category: "Hackathon",
@@ -71,7 +71,7 @@ export const achievements: Achievement[] = [
         }
     },
     {
-        id: "achievement-4",
+        id: "super-ai-ideathon-2023-first-place",
         title: "1st Position @Super AI Ideathon 2023",
         description: "",
         category: "Hackathon",

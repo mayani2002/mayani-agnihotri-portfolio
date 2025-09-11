@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX } from 'react-icons/fi';
-import { OptimizedImage } from './OptimizedImage';
+import { OptimizedImage } from './OptimizedImageNew';
 
 interface ImageModalProps {
     src: string;
@@ -112,7 +112,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, isOpen, onClose }) =>
                                 alt={alt}
                                 width={1200}
                                 height={800}
-                                quality={95}
                                 className="max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
                                 priority
                             />

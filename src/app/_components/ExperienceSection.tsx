@@ -2,8 +2,8 @@
 
 import React, { useRef, useState } from 'react';
 import { workExperience } from '@/data/experience';
-import { OptimizedImage } from './OptimizedImage';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { OptimizedImage } from './OptimizedImageNew';
 
 interface ExperienceCardProps {
     experience: typeof workExperience[0];

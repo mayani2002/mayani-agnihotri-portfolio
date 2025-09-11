@@ -14,8 +14,8 @@ import {
     FiAlertTriangle
 } from 'react-icons/fi';
 import { Project } from '@/data/projects';
-import { OptimizedImage } from './OptimizedImage';
-import ImageModal from './ImageModal';
+import { OptimizedImage } from './OptimizedImageNew';
+import { useImageModal } from '@/contexts/ImageModalContext';
 
 interface ProjectModalProps {
     project: Project | null;
@@ -24,7 +24,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
-    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+    const { openImageModal } = useImageModal();
 
     if (!project) return null;
 
@@ -67,7 +67,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
     };
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {isOpen && (
                 <motion.div
                     variants={backdropVariants}
@@ -94,12 +94,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                         </button>
 
                         {/* Project Images */}
-                        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl cursor-pointer group" onClick={() => setSelectedImage({ src: project.images[0] || '/placeholder-project.svg', alt: project.title })}>
+                        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl cursor-pointer group" onClick={() => openImageModal(project.images?.[0] || '/placeholder-project.svg', project.title)}>
                             <OptimizedImage
-                                src={project.images[0] || '/placeholder-project.svg'}
+                                src={project.images?.[0] || '/placeholder-project.svg'}
                                 alt={project.title}
                                 fill
                                 className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                quality={85}
+                                sizes="(max-width: 768px) 100vw, 80vw"
+                                priority
                             />
                             {project.featured && (
                                 <div className="absolute top-4 left-4 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
@@ -193,9 +196,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                             <div className="mb-8">
                                 <h3 className="text-xl font-semibold text-primary mb-3 font-kalam">Technologies Used</h3>
                                 <div className="flex flex-wrap gap-1">
-                                    {project.technologies.map((tech) => (
+                                    {project.technologies.map((tech, index) => (
                                         <span
-                                            key={tech}
+                                            key={`tech-${index}`}
                                             className="exp-tech-badge px-2 py-1 text-xs rounded-full font-medium"
                                         >
                                             {tech}
@@ -258,7 +261,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                         </h3>
                                         <ul className="space-y-2">
                                             {project.challenges.map((challenge, index) => (
-                                                <li key={`${project.id}-challenge-${index}-${challenge.slice(0, 10)}`} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
+                                                <li key={`challenge-${index}`} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
                                                     <span className="text-orange-500 mt-1">•</span>
                                                     {challenge}
                                                 </li>
@@ -275,7 +278,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                         </h3>
                                         <ul className="space-y-2">
                                             {project.learnings.map((learning, index) => (
-                                                <li key={`${project.id}-learning-${index}-${learning.slice(0, 10)}`} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
+                                                <li key={`learning-${index}`} className="flex items-start gap-2 text-primary text-sm leading-relaxed">
                                                     <span className="text-green-500 mt-1">•</span>
                                                     {learning}
                                                 </li>
@@ -288,14 +291,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                     </motion.div>
                 </motion.div>
             )}
-
-            {/* Image Modal */}
-            <ImageModal
-                src={selectedImage?.src || ''}
-                alt={selectedImage?.alt || ''}
-                isOpen={!!selectedImage}
-                onClose={() => setSelectedImage(null)}
-            />
         </AnimatePresence>
     );
 };

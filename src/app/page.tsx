@@ -12,7 +12,6 @@ import AchievementSection from "./_components/AchievementSection";
 import EducationSection from "./_components/EducationSection";
 import CallToAction from './_components/CallToAction';
 import { ErrorBoundary } from './_components/ErrorBoundary';
-import { NoSSR } from './_components/NoSSR';
 
 export const Home: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -58,10 +57,8 @@ export const Home: React.FC = () => {
   return (
     <ErrorBoundary>
       {/* Navigation Components */}
-      <NoSSR>
         <LeftSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
         <RightVerticalNav />
-      </NoSSR>
 
       {/* Main Content with Dynamic Margins */}
       <main

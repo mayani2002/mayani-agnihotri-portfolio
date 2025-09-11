@@ -13,6 +13,7 @@ import {
     FiTrendingUp,
     FiGlobe
 } from 'react-icons/fi';
+import { OptimizedImage } from './OptimizedImageNew';
 
 const AboutSection: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -84,8 +85,8 @@ const AboutSection: React.FC = () => {
 
                             <p className="leading-relaxed mb-4">
                                 My journey in tech began with curiosity and has evolved into expertise across
-                                <span className="text-purple-600 dark:text-purple-400 font-semibold"> React, Node.js, AI, and cloud technologies</span>.
-                                I thrive on learning, adapting, and turning ideas into impact. With a strong belief in resilience and consistency, I bring clarity and calm even in challenging situations. 
+                                <span className="teProject-thumbnail1.pngxt-purple-600 dark:text-purple-400 font-semibold"> React, Node.js, AI, and cloud technologies</span>.
+                                I thrive on learning, adapting, and turning ideas into impact. With a strong belief in resilience and consistency, I bring clarity and calm even in challenging situations.
                             </p>
 
                             <p className="leading-relaxed">

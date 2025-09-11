@@ -19,7 +19,8 @@ import {
     FiShield
 } from 'react-icons/fi';
 import { Achievement } from '@/data/achievements';
-import ImageModal from './ImageModal';
+import { OptimizedImage } from './OptimizedImageNew';
+import { useImageModal } from '@/contexts/ImageModalContext';
 
 interface AchievementModalProps {
     achievement: Achievement | null;
@@ -39,7 +40,7 @@ interface AchievementModalProps {
  * - 🎯 Achievement importance indicators
  */
 const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen, onClose }) => {
-    const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+    const { openImageModal } = useImageModal();
 
     if (!achievement) return null;
 
@@ -146,7 +147,7 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
     const importanceStyle = getImportanceStyle(achievement.importance);
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {isOpen && (
                 <motion.div
                     variants={backdropVariants}
@@ -238,13 +239,15 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                                             <div
                                                 key={`${achievement.id}-image-${index}-${imageUrl.split('/').pop()}`}
                                                 className="relative overflow-hidden rounded-lg border border-themed hover:border-primary-light transition-colors duration-300 cursor-pointer group"
-                                                onClick={() => setSelectedImage({ src: imageUrl, alt: `${achievement.title} - Image ${index + 1}` })}
+                                                onClick={() => openImageModal(imageUrl, `${achievement.title} - Image ${index + 1}`)}
                                             >
-                                                <img
+                                                <OptimizedImage
                                                     src={imageUrl}
                                                     alt={`${achievement.title} - Image ${index + 1}`}
-                                                    className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
-                                                    loading="lazy"
+                                                    width={200}
+                                                    height={128}
+                                                    className="hover:scale-105 transition-transform duration-300"
+                                                    quality={85}
                                                 />
                                                 {/* Hover overlay hint */}
                                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
@@ -363,14 +366,6 @@ const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, isOpen
                     </motion.div>
                 </motion.div>
             )}
-
-            {/* Image Modal */}
-            <ImageModal
-                src={selectedImage?.src || ''}
-                alt={selectedImage?.alt || ''}
-                isOpen={!!selectedImage}
-                onClose={() => setSelectedImage(null)}
-            />
         </AnimatePresence>
     );
 };

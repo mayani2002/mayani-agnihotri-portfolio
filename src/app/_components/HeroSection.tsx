@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { personalInfo } from '../../data/personal';
 import { ComponentErrorBoundary } from './ErrorBoundary';
-import { OptimizedImage } from './OptimizedImage';
+import { OptimizedImage } from './OptimizedImageNew';
 
 /**
  * Hero Section Component
