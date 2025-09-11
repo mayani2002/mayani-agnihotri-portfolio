@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://mayani-agnihotri.vercel.app/sitemap.xml
+Sitemap: https://mayaniagnihotri.com/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

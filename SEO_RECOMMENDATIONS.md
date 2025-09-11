@@ -46,7 +46,7 @@
   "@type": "Person",
   "name": "Mayani Agnihotri",
   "jobTitle": "Software Engineer",
-  "url": "https://mayani-agnihotri.vercel.app",
+  "url": "https://mayaniagnihotri.com",
   "sameAs": [
     "https://linkedin.com/in/mayani-agnihotri",
     "https://github.com/mayani2002"
